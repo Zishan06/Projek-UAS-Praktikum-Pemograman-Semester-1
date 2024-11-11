@@ -21,7 +21,7 @@
 
     int main(){
         struct pengguna penggunabaru;
-        printf("Selamat datang di game paling gacor\n");
+        printf("Selamat datang di game paling gacor maxwinn777\n");
         printf("Silahkan buat akun dulu\n");
         
         printf("Masukkan username : ");
@@ -32,7 +32,7 @@
         fgets(penggunabaru.pass, sizeof(penggunabaru.pass), stdin);
         penggunabaru.pass[strcspn(penggunabaru.pass, "\n")] = '\0';
 
-        IniUntukBuatFileBinYagesya("pengguna.bin", penggunabaru);
+        IniUntukBuatFileBinYagesya("database/login.bin", penggunabaru);
 
 
         
