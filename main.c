@@ -9,7 +9,7 @@
 
     void registrationSystem(){
         struct pengguna penggunabaru;
-        FILE *regis = fopen("database/login.bin", "ab");
+        
         char buffer[255];
             
         printf("Selamat datang di game paling gacor maxwinn777\n");
@@ -21,11 +21,13 @@
             
         printf("Masukkan password : ");
         fgets(penggunabaru.pass, sizeof(penggunabaru.pass), stdin);
+
+        FILE *regis = fopen("database/login.bin", "ab");
         if(regis == NULL){
                 perror("Error ges");
                 exit(1);
         }
-        snprintf(buffer, 255, "%s#%s\n", penggunabaru.username, penggunabaru.pass);
+        snprintf(buffer, 255, "%s#%s", penggunabaru.username, penggunabaru.pass);
         fwrite(buffer, 1, strlen(buffer), regis);
         fclose(regis);
     }
