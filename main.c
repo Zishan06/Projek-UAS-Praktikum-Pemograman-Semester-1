@@ -35,9 +35,5 @@
         IniUntukBuatFileBinYagesya("database/login.bin", penggunabaru);
 
 
-        
-    
-
-
     return 0;
 }
