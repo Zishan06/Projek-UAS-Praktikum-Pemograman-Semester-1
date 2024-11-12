@@ -7,33 +7,33 @@
         char pass[10];
     };
 
-    void IniUntukBuatFileBinYagesya(const char *namafile, struct pengguna user){
-        FILE *file = fopen(namafile, "ab");
-        if(file == NULL){
-            perror("Error pulak bah");
-            exit(1);
+    void registrationSystem(){
+        struct pengguna penggunabaru;
+        FILE *regis = fopen("database/login.bin", "ab");
+        char buffer[255];
+            
+        printf("Selamat datang di game paling gacor maxwinn777\n");
+        printf("Silahkan buat akun dulu\n");
+        
+        printf("Masukkan username : ");
+        fgets(penggunabaru.username, sizeof(penggunabaru.username), stdin);
+        penggunabaru.username[strcspn(penggunabaru.username, "\n")] = '\0';
+            
+        printf("Masukkan password : ");
+        fgets(penggunabaru.pass, sizeof(penggunabaru.pass), stdin);
+        if(regis == NULL){
+                perror("Error ges");
+                exit(1);
         }
-        fwrite(&user, sizeof(struct pengguna), 1, file);
-
-        fclose(file);
-        printf("sername sudah disimpan, have fun!\nKetik dengan format\n-> ./main (username) (password)\n");
+        snprintf(buffer, 255, "%s#%s\n", penggunabaru.username, penggunabaru.pass);
+        fwrite(buffer, 1, strlen(buffer), regis);
+        fclose(regis);
     }
 
     int main(int argc, char *argv[]){
         if(strcmp(argv[1], "register")==0 && argc == 2) {
-            struct pengguna penggunabaru;
-            printf("Selamat datang di game paling gacor maxwinn777\n");
-            printf("Silahkan buat akun dulu\n");
-        
-            printf("Masukkan username : ");
-            fgets(penggunabaru.username, sizeof(penggunabaru.username), stdin);
-            penggunabaru.username[strcspn(penggunabaru.username, "\n")] = '#';
-
-            printf("Masukkan password : ");
-            fgets(penggunabaru.pass, sizeof(penggunabaru.pass), stdin);
-            penggunabaru.pass[strcspn(penggunabaru.pass, "\n")] = '@';
-
-            IniUntukBuatFileBinYagesya("database/login.bin", penggunabaru);
+            registrationSystem();
+            
         } else if(strcmp(argv[1], "login")==0 && argc==4) {
             FILE *file = fopen("database/login.bin", "rb");
         }
