@@ -7,7 +7,7 @@
         char pass[10];
     };
 
-    void IniUntukBuatFileBinYagesya(const char *namafile, struct pengguna user){
+    void IniUntukBuatFileBinYagesya (const char *namafile, struct pengguna user){
         FILE *file = fopen(namafile, "ab");
         if(file == NULL){
             perror("Error pulak bah");
