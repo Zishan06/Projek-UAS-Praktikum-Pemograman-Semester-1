@@ -32,8 +32,10 @@
     }
 
     int main(int argc, char *argv[]){
-        
-        if(strcmp(argv[1], "register")==0 && argc == 2) {
+        if(argc < 2){
+            printf(" Format CLA tidak sesuai, coba:\n-> ./main register\n-> ./main login (username) (password)\n");
+        }
+        else if(strcmp(argv[1], "register")==0 && argc == 2) {
             registrationSystem();
             
         } else if(strcmp(argv[1], "login")==0 && argc==4) {
