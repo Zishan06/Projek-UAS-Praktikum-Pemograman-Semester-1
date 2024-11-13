@@ -33,17 +33,15 @@
     }
    
     void createFolder(const char *folder_name) { 
-    if ( _access(folder_name, 0) == 0) {
-        printf("Folder %s sudah ada. Ga perlu buat lagi.\n", folder_name);
-    } else {
-    if (_mkdir(folder_name) == 0) {
-        printf("Folder '%s' berhasil dibuat.\n", folder_name);
-    } else {
-       
-        perror("Error ges");
+    if ( _access(folder_name, 0) == 0) 
+     printf("Folder %s sudah ada. Ga perlu buat lagi.\n", folder_name);
+    else 
+    if (_mkdir(folder_name) == 0) 
+     printf("Folder '%s' berhasil dibuat.\n", folder_name);
+    else 
+     perror("Error ges");
     }
-    }
-}
+
 
     int main(int argc, char *argv[]){
         if(argc < 2){
