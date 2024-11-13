@@ -44,7 +44,7 @@
             
         }
         else {
-            printf("Format CLA tidak sesuai, coba:\n-> ./main register\n-> ./main login (username) (password)\n");
+            printf(" Format CLA tidak sesuai, coba:\n-> ./main register\n-> ./main login (username) (password)\n");
         }
     return 0;
 }
