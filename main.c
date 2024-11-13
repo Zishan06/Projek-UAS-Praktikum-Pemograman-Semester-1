@@ -31,13 +31,19 @@
         fprintf(regis, "%s#%s=0\n", penggunabaru.username, penggunabaru.pass);
         fclose(regis);
     }
-
-    void createFolder(const char *folder_name) {
+    int cekfolder(const char *folder_name) {
+    return _access(folder_name, 0) == 0;  //untuk cek folder dah ada atau gak
+}
+    void createFolder(const char *folder_name) { 
+    if (cekfolder(folder_name)) {
+        printf("Folder %s sudah ada. Ga perlu buat lagi.\n", folder_name);
+    } else {
     if (_mkdir(folder_name) == 0) {
         printf("Folder '%s' berhasil dibuat.\n", folder_name);
     } else {
        
         perror("Error ges");
+    }
     }
 }
 
