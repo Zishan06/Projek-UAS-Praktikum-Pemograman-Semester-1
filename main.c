@@ -22,7 +22,7 @@
         fgets(penggunabaru.pass, sizeof(penggunabaru.pass), stdin);
         penggunabaru.username[strcspn(penggunabaru.username, "\n")] = '\0';
 
-        FILE *regis = fopen("database/login.bin", "ab");
+        FILE *regis = fopen("database/login.bin", "ab"); //ini tolong dibuat jadi write ygy tapi kalau memang dah ada ya open aja, pakai if bisa kyknya
         if(regis == NULL){
                 perror("Error ges");
                 exit(1);
@@ -33,7 +33,7 @@
 
     int main(int argc, char *argv[]){
         if(argc < 2){
-            printf(" Format CLA tidak sesuai, coba:\n-> ./main register\n-> ./main login (username) (password)\n");
+            printf(" Selamat datang di game, silahkan ikuti petunjuk command line di bawah untuk lanjut :3, coba:\n-> ./main register\n-> ./main login (username) (password)\n");
         }
         else if(strcmp(argv[1], "register")==0 && argc == 2) {
             registrationSystem();
