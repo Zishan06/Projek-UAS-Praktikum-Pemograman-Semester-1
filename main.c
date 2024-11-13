@@ -20,7 +20,7 @@
             
         printf("Masukkan password : ");
         fgets(penggunabaru.pass, sizeof(penggunabaru.pass), stdin);
-        penggunabaru.username[strcspn(penggunabaru.username, "\n")] = '\0';
+        penggunabaru.pass[strcspn(penggunabaru.pass, "\n")] = '\0';
 
         FILE *regis = fopen("database/login.bin", "ab"); //ini tolong dibuat jadi write ygy tapi kalau memang dah ada ya open aja, pakai if bisa kyknya
         if(regis == NULL){
