@@ -22,10 +22,10 @@
         FILE *checkFile = fopen("database/login.bin", "rb");
         if (checkFile != NULL)
         {
-            char line[50];
-            while (fgets(line, sizeof(line), checkFile))
+            char baris[50];
+            while (fgets(baris, sizeof(baris), checkFile))
             {
-                char *fileUsername = strtok(line, "#");
+                char *fileUsername = strtok(baris, "#");
                 if (strcmp(fileUsername, penggunabaru.username) == 0)
                 {
                 printf("Username sudah digunakan. Silakan pilih username lain.\n");
