@@ -18,6 +18,23 @@
         printf("Masukkan username : ");
         fgets(penggunabaru.username, sizeof(penggunabaru.username), stdin);
         penggunabaru.username[strcspn(penggunabaru.username, "\n")] = '\0';
+
+        FILE *checkFile = fopen("database/login.bin", "rb");
+        if (checkFile != NULL)
+        {
+            char line[50];
+            while (fgets(line, sizeof(line), checkFile))
+            {
+                char *fileUsername = strtok(line, "#");
+                if (strcmp(fileUsername, penggunabaru.username) == 0)
+                {
+                printf("Username sudah digunakan. Silakan pilih username lain.\n");
+                fclose(checkFile);
+                return;
+                }
+            }
+            fclose(checkFile);
+        }
             
         printf("Masukkan password : ");
         fgets(penggunabaru.pass, sizeof(penggunabaru.pass), stdin);
