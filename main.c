@@ -7,6 +7,7 @@
         char pass[10];
         int score;
     };
+    const char *folder_name = "database";
 
     void registrationSystem(){
         struct pengguna penggunabaru;
@@ -20,9 +21,9 @@
             
         printf("Masukkan password : ");
         fgets(penggunabaru.pass, sizeof(penggunabaru.pass), stdin);
-        penggunabaru.pass[strcspn(penggunabaru.pass, "\n")] = '\0';
+        penggunabaru.username[strcspn(penggunabaru.username, "\n")] = '\0';
 
-        FILE *regis = fopen("database/login.bin", "ab"); //ini tolong dibuat jadi write ygy tapi kalau memang dah ada ya open aja, pakai if bisa kyknya
+        FILE *regis = fopen("database/login.bin", "ab"); 
         if(regis == NULL){
                 perror("Error ges");
                 exit(1);
@@ -31,11 +32,21 @@
         fclose(regis);
     }
 
+    void createFolder(const char *folder_name) {
+    if (_mkdir(folder_name) == 0) {
+        printf("Folder '%s' berhasil dibuat.\n", folder_name);
+    } else {
+       
+        perror("Error ges");
+    }
+}
+
     int main(int argc, char *argv[]){
         if(argc < 2){
-            printf(" Selamat datang di game, silahkan ikuti petunjuk command line di bawah untuk lanjut :3, coba:\n-> ./main register\n-> ./main login (username) (password)\n");
+            printf("Selamat datang di game paling gacor, silahkan ikuti petunjuk command line di bawah untuk lanjut :3, coba:\n-> ./main register\n-> ./main login (username) (password)\n");
         }
         else if(strcmp(argv[1], "register")==0 && argc == 2) {
+            createFolder(folder_name);
             registrationSystem();
             
         } else if(strcmp(argv[1], "login")==0 && argc==4) {
