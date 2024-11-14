@@ -1,10 +1,14 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#include<io.h>
-#include<direct.h>
-#include<unistd.h>
 #include<ctype.h>
+#ifdef _WIN32
+    #include <io.h>
+    #include<direct.h>
+#else
+    #include <unistd.h>
+    #include <sys/stat.h>
+#endif
 
     struct pengguna{
         char username[14];
@@ -83,21 +87,23 @@
     #ifdef _WIN32  //ni kalau di windows
         if (_access(folder_name, 0) == 0) 
          printf("Folder %s sudah ada. Ga perlu buat lagi.\n", folder_name);
-        else
-        if (_mkdir(folder_name) == 0) 
-         printf("Folder '%s' berhasil dibuat.\n", folder_name);
-        else 
-         perror("Error ges");
+        else {
+            if (_mkdir(folder_name) == 0) 
+                printf("Folder '%s' berhasil dibuat.\n", folder_name);
+            else 
+                perror("Error ges");
         }
     #else //ni kalau di linux
         if (access(folder_name, F_OK) == 0) 
             printf("Folder %s sudah ada. Ga perlu buat lagi.\n", folder_name);
-        else 
-        if (mkdir(folder_name, 0777) == 0) 
-         printf("Folder '%s' berhasil dibuat.\n", folder_name);
-        else 
-         perror("Error ges");
+        else {
+            if (mkdir(folder_name, 0777) == 0) 
+                printf("Folder '%s' berhasil dibuat.\n", folder_name);
+            else 
+                perror("Error ges");
+        }
     #endif
+    }
 
 
     int main(int argc, char *argv[]){
