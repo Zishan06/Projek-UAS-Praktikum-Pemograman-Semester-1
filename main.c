@@ -42,7 +42,7 @@
         fgets(penggunabaru.pass, sizeof(penggunabaru.pass), stdin);
         penggunabaru.pass[strcspn(penggunabaru.pass, "\n")] = '\0';
 
-        if(strlen(penggunabaru.pass < 8 || penggunabaru.pass > 12)){
+        if(strlen(penggunabaru.pass) < 8 || strlen(penggunabaru.pass) > 12){
             printf("Password harus minimal 8 dan maksimal 12.\n");
             return;
         }
