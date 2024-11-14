@@ -126,6 +126,7 @@
                 if(strcmp(argv[2], user[i].username)==0) {
                     isCorrect++;
                     if(strcmp(argv[3], user[i].pass)==0) { 
+                        isCorrect++;
                         strcpy(player.username, user[i].username);
                         strcpy(player.pass, user[i].pass);
                         player.score = user[i].score;
@@ -136,13 +137,13 @@
                     }
                 }
             }
-            if(isCorrect==1) {
+            if(isCorrect==2) {
                 printf("selamat datang %s\nScore saat ini: %d\n", player.username, player.score);
-            } else {
+                printf("SOAL PERTAMA");
+            } else if (isCorrect == 0) {
                 printf("username tidak ditemukan\n");
                 exit(1);
             }
-            printf("SOAL PERTAMA");
         }
         else {
             printf(" Format CLA tidak sesuai, coba:\n-> ./main register\n-> ./main login (username) (password)\n");
