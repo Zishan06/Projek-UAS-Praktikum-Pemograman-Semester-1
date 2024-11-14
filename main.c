@@ -41,13 +41,23 @@
         fgets(penggunabaru.pass, sizeof(penggunabaru.pass), stdin);
         penggunabaru.pass[strcspn(penggunabaru.pass, "\n")] = '\0';
 
-        FILE *regis = fopen("database/login.bin", "ab"); 
-        if(regis == NULL){
+        if (strcmp(confirmPassword, penggunabaru.pass) != 0)
+        {
+        printf("Password yang anda masukkan tidak sama dengan yang sebelumnya.\n");
+        return;
+        }
+        else
+        {
+            FILE *regis = fopen("database/login.bin", "ab");
+            if (regis == NULL)
+            {
                 perror("Error ges");
                 exit(1);
+            }
+            fprintf(regis, "%s#%s=0\n", penggunabaru.username, penggunabaru.pass);
+            fclose(regis);
+            printf("Halo\n");
         }
-        fprintf(regis, "%s#%s=0\n", penggunabaru.username, penggunabaru.pass);
-        fclose(regis);
     }
    
     void createFolder(const char *folder_name) { 
@@ -108,6 +118,5 @@
         else {
             printf(" Format CLA tidak sesuai, coba:\n-> ./main register\n-> ./main login (username) (password)\n");
         }
-        printf("Halo\n");
     return 0;
 }
