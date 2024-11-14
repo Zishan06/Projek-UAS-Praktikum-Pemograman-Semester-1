@@ -5,15 +5,15 @@
 #include<ctype.h>
 
     struct pengguna{
-        char username[10];
-        char pass[10];
+        char username[14];
+        char pass[14];
         int score;
     };
     const char *folder_name = "database";
 
     void sistemregistrasi(){
         struct pengguna penggunabaru;
-        char konfirpassword[10];
+        char konfirpassword[14];
     
         printf("Selamat datang di game paling gacor maxwinn777\nKetik Username dan password untuk mendaftar\n");
         
@@ -41,6 +41,11 @@
         printf("Masukkan password : ");
         fgets(penggunabaru.pass, sizeof(penggunabaru.pass), stdin);
         penggunabaru.pass[strcspn(penggunabaru.pass, "\n")] = '\0';
+
+        if(strlen(penggunabaru.pass < 8 && penggunabaru.pass > 12)){
+            printf("Password harus minimal 8 dan maksimal 12.\n");
+            return;
+        }
 
         for (int i = 0; penggunabaru.pass[i] != '\0'; i++)
         {
