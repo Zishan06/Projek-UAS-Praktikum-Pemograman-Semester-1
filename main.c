@@ -10,9 +10,9 @@
     };
     const char *folder_name = "database";
 
-    void registrationSystem(){
+    void sistemregistrasi(){
         struct pengguna penggunabaru;
-        char confirmPassword[10];
+        char konfirpassword[10];
     
         printf("Selamat datang di game paling gacor maxwinn777\nKetik Username dan password untuk mendaftar\n");
         
@@ -20,21 +20,21 @@
         fgets(penggunabaru.username, sizeof(penggunabaru.username), stdin);
         penggunabaru.username[strcspn(penggunabaru.username, "\n")] = '\0';
 
-        FILE *checkFile = fopen("database/login.bin", "rb");
-        if (checkFile != NULL)
+        FILE *checkfile = fopen("database/login.bin", "rb");
+        if (checkfile != NULL)
         {
             char baris[50];
-            while (fgets(baris, sizeof(baris), checkFile))
+            while (fgets(baris, sizeof(baris), checkfile))
             {
                 char *fileUsername = strtok(baris, "#");
                 if (strcmp(fileUsername, penggunabaru.username) == 0)
                 {
                 printf("Username sudah digunakan. Silakan pilih username lain.\n");
-                fclose(checkFile);
+                fclose(checkfile);
                 return;
                 }
             }
-            fclose(checkFile);
+            fclose(checkfile);
         }
             
         printf("Masukkan password : ");
@@ -42,10 +42,10 @@
         penggunabaru.pass[strcspn(penggunabaru.pass, "\n")] = '\0';
 
         printf("konfirmasi password : ");
-        fgets(confirmPassword, sizeof(confirmPassword), stdin);
-        confirmPassword[strcspn(confirmPassword, "\n")] = '0';
+        fgets(konfirpassword, sizeof(konfirpassword), stdin);
+        konfirpassword[strcspn(konfirpassword, "\n")] = '0';
 
-        if (strcmp(confirmPassword, penggunabaru.pass) == 0)
+        if (strcmp(konfirpassword, penggunabaru.pass) == 0)
         {
             printf("Password yang anda masukkan tidak sama dengan yang sebelumnya.\n");
             return;
@@ -62,7 +62,7 @@
         printf("Halo!\n");
     }
    
-    void createFolder(const char *folder_name) { 
+    void buatfolder(const char *folder_name) { 
     if ( _access(folder_name, 0) == 0) 
      printf("Folder %s sudah ada. Ga perlu buat lagi.\n", folder_name);
     else 
@@ -78,17 +78,17 @@
             printf("Selamat datang di game paling gacor, silahkan ikuti petunjuk command line di bawah untuk lanjut :3, coba:\n-> ./main register\n-> ./main login (username) (password)\n");
         }
         else if(strcmp(argv[1], "register")==0 && argc == 2) {
-            createFolder(folder_name);
-            registrationSystem();
+            buatfolder(folder_name);
+            sistemregistrasi();
             
         } else if(strcmp(argv[1], "login")==0 && argc==4) {
 
             struct pengguna user[10];
-            char binFile[100];
+            char binfile[100];
             FILE *file = fopen("database/login.bin", "rb");
             int i=0;
-            while(fgets(binFile, sizeof(binFile), file) && i < 10){
-                sscanf(binFile, "%[^#]#%[^=]=%d\n", user[i].username, user[i].pass, &user[i].score);
+            while(fgets(binfile, sizeof(binfile), file) && i < 10){
+                sscanf(binfile, "%[^#]#%[^=]=%d\n", user[i].username, user[i].pass, &user[i].score);
                 i++;
             }
             fclose(file);
