@@ -106,35 +106,68 @@
     #endif
     }
 
-    void acakSoal(int *skor, int *soalTampil, const char **soal, const char *pilihan[][4], int jumlahSoal, const int *jawabanBenar){
-        int indeks;
-        do
-        {
-            indeks = rand() % jumlahSoal;
-        } while (soalTampil[indeks] == 1);
+    void soalQuiz(int *skor){
+        const char *soal[] = {
+            "Apa nama lautan terbesar di dunia?",
+            "Planet terdekat dengan matahari adalah?",
+            "Siapa presiden pertama amerika serikat?",
+            "Berapakah jumlah warna untuk pelangi?",
+            "Siapa pelukis dari lukisan 'mona lisa'?",
+            "Apa nama sungai terpanjang di dunia?",
+            "Apa mata uang resmi jepang?",
+            "Negara apa yang disebut dengan 'Negari Tirai Bambu'?",
+            "Apa bahasa resmi di brazil?",
+            "Berapa warna yang ada pada bendera italia?"};
 
-        soalTampil[indeks] = 1;
+        const char *pilihan[][4] = {
+            {"Samudra Atlantik", "Samudra Arktik", "Samudra Pasifik", "Samudra Hindia"},
+            {"Venus", "Merkurius", "Mars", "Uranus"},
+            {"George Washington", "Abraham Lincoln", "John Adams", "Thomas Jefferson"},
+            {"5", "6", "7", "8"},
+            {"Pablo Picasso", "Michelangelo", "Vincent van Gogh", "Leonardo da Vinci"},
+            {"Amazon", "Nile", "Yangtze", "Mississippi"},
+            {"Yuan", "Won", "Yen", "Dong"},
+            {"Jepang", "China", "Korea Selatan", "Vietnam"},
+            {"Portugis", "Spanyol", "Inggris", "Prancis"},
+            {"3", "2", "4", "5"}};
 
-        printf("%s\n", soal[indeks]);
-        for (int i = 0; i < 4; i++)
-        {
-            printf("%d. %s\n", i + 1, pilihan[indeks][i]);
-        }
+        const int jawabanBenar[] = {2, 1, 0, 2, 3, 1, 2, 1, 0, 0};
 
-        int jawabanPengguna;
-        printf("Pilihlah jawaban dari (1 - 4) : ");
-        scanf("%d", &jawabanPengguna);
+        int jumlahSoal = sizeof(soal) / sizeof(soal[0]);
+        int soalTampil[jumlahSoal];
+        memset(soalTampil, 0, sizeof(soalTampil));
 
-        if (jawabanPengguna - 1 == jawabanBenar[indeks])
-        {
-            printf("Jawaban Benar!\n");
-            *skor = *skor + 20;
-        }
-        else
-        {
-            printf("Jawaban Salah!\nJawaban yang benar adalah %s\n", pilihan[indeks][jawabanBenar[indeks]]);
-        }
-        printf("\n");
+        for(int j = 0; j < 5; j++){
+            int indeks;
+            printf("Soal %d :\n", j+1);
+            do
+            {
+                indeks = rand() % jumlahSoal;
+            } while (soalTampil[indeks] == 1);
+
+            soalTampil[indeks] = 1;
+
+            printf("%s\n", soal[indeks]);
+            for (int i = 0; i < 4; i++)
+            {
+                printf("%d. %s\n", i + 1, pilihan[indeks][i]);
+            }
+
+            int jawabanPengguna;
+            printf("Pilihlah jawaban dari (1 - 4) : ");
+            scanf("%d", &jawabanPengguna);
+
+            if (jawabanPengguna - 1 == jawabanBenar[indeks])
+            {
+                printf("Jawaban Benar!\n");
+                *skor = *skor + 20;
+            }
+            else
+            {
+                printf("Jawaban Salah!\nJawaban yang benar adalah %s\n", pilihan[indeks][jawabanBenar[indeks]]);
+            }
+            printf("\n");
+        }    
     }
 
 
@@ -182,51 +215,10 @@
             }
             if(isCorrect==2) {
                 srand(time(NULL));
-                player.score = 0;
-                
                 printf("selamat datang %s\nScore saat ini: %d\n", player.username, player.score);
-                
-                const char *soal[] = {
-                    "Apa nama lautan terbesar di dunia?",
-                    "Planet terdekat dengan matahari adalah?",
-                    "Siapa presiden pertama amerika serikat?",
-                    "Berapakah jumlah warna untuk pelangi?",
-                    "Siapa pelukis dari lukisan 'mona lisa'?",
-                    "Apa nama sungai terpanjang di dunia?",
-                    "Apa mata uang resmi jepang?",
-                    "Negara apa yang disebut dengan 'Negari Tirai Bambu'?",
-                    "Apa bahasa resmi di brazil?",
-                    "Berapa warna yang ada pada bendera italia?"};
+                player.score = 0;
 
-                const char *pilihan[][4] = {
-                    {"Samudra Atlantik", "Samudra Arktik", "Samudra Pasifik", "Samudra Hindia"},
-                    {"Venus", "Merkurius", "Mars", "Uranus"},
-                    {"George Washington", "Abraham Lincoln", "John Adams", "Thomas Jefferson"},
-                    {"5", "6", "7", "8"},
-                    {"Pablo Picasso", "Michelangelo", "Vincent van Gogh", "Leonardo da Vinci"},
-                    {"Amazon", "Nile", "Yangtze", "Mississippi"},
-                    {"Yuan", "Won", "Yen", "Dong"},
-                    {"Jepang", "China", "Korea Selatan", "Vietnam"},
-                    {"Portugis", "Spanyol", "Inggris", "Prancis"},
-                    {"3", "2", "4", "5"}};
-
-                const int jawabanBenar[] = {2, 1, 0, 2, 3, 1, 2, 1, 0, 0};
-
-                int jumlahSoal = sizeof(soal) / sizeof(soal[0]);
-
-                char lanjut;
-                int j = 0;
-                int soalTampil[jumlahSoal];
-
-                memset(soalTampil, 0, sizeof(soalTampil));
-
-                do
-                {
-                    j++;
-                    printf("Soal %d :\n", j);
-                    acakSoal(&player.score, soalTampil, soal, pilihan, jumlahSoal, jawabanBenar);
-
-                } while (j < 5);
+                soalQuiz(&player.score);
 
                 printf("\nTerimakasih telah bermain!\nSkor akhir anda : %d\n", player.score);
 
@@ -256,7 +248,6 @@
                     k++;
                 }
                 fclose(updateFile);
-                
             } else if (isCorrect == 0) {
                 printf("username tidak ditemukan\n");
                 exit(1);
