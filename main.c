@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include<io.h>
 
     struct pengguna{
         char username[10];
@@ -38,7 +39,7 @@
             
         printf("Masukkan password : ");
         fgets(penggunabaru.pass, sizeof(penggunabaru.pass), stdin);
-        penggunabaru.pass[strcspn(penggunabaru.pass, "\n")] = '\0';
+        penggunabaru.username[strcspn(penggunabaru.pass, "\n")] = '\0';
 
         FILE *regis = fopen("database/login.bin", "ab"); 
         if(regis == NULL){
@@ -69,14 +70,44 @@
             registrationSystem();
             
         } else if(strcmp(argv[1], "login")==0 && argc==4) {
-            struct pengguna users[10];
+
+            struct pengguna user[10];
             char binFile[100];
             FILE *file = fopen("database/login.bin", "rb");
-            fgets(binFile, sizeof(binFile), file);
-            
+            int i=0;
+            while(fgets(binFile, sizeof(binFile), file) && i < 10){
+                sscanf(binFile, "%[^#]#%[^=]=%d\n", user[i].username, user[i].pass, &user[i].score);
+                i++;
+            }
+            fclose(file);
+
+            int isCorrect=0;
+            struct pengguna player;
+            for(i=0; i<10; i++) {
+                if(strcmp(argv[2], user[i].username)==0) {
+                    isCorrect++;
+                    if(strcmp(argv[3], user[i].pass)==0) { 
+                        strcpy(player.username, user[i].username);
+                        strcpy(player.pass, user[i].pass);
+                        player.score = user[i].score;
+                        break;
+                    } else {
+                        printf("Password anda salah\n");
+                        break;
+                    }
+                }
+            }
+            if(isCorrect==1) {
+                printf("selamat datang %s\nScore saat ini: %d\n", player.username, player.score);
+            } else {
+                printf("username tidak ditemukan\n");
+                exit(1);
+            }
+            printf("SOAL PERTAMA");
         }
         else {
             printf(" Format CLA tidak sesuai, coba:\n-> ./main register\n-> ./main login (username) (password)\n");
         }
+        printf("Halo\n");
     return 0;
 }
