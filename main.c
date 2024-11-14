@@ -43,8 +43,8 @@
 
         if (strcmp(confirmPassword, penggunabaru.pass) != 0)
         {
-        printf("Password yang anda masukkan tidak sama dengan yang sebelumnya.\n");
-        return;
+            printf("Password yang anda masukkan tidak sama dengan yang sebelumnya.\n");
+            return;
         }
          
         FILE *regis = fopen("database/login.bin", "ab");
