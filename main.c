@@ -2,6 +2,7 @@
 #include<stdlib.h>
 #include<string.h>
 #include<io.h>
+#include<ctype.h>
 
     struct pengguna{
         char username[10];
@@ -41,11 +42,20 @@
         fgets(penggunabaru.pass, sizeof(penggunabaru.pass), stdin);
         penggunabaru.pass[strcspn(penggunabaru.pass, "\n")] = '\0';
 
+        for (int i = 0; penggunabaru.pass[i] != '\0'; i++)
+        {
+            if (!isalnum(penggunabaru.pass[i]))
+            {
+            printf("Password tidak boleh mengandung karakter special.\n");
+            return;
+            }
+        }
+
         printf("konfirmasi password : ");
         fgets(konfirpassword, sizeof(konfirpassword), stdin);
         konfirpassword[strcspn(konfirpassword, "\n")] = '\0';
 
-        if (strcmp(konfirpassword, penggunabaru.pass) == 0)
+        if (strcmp(konfirpassword, penggunabaru.pass) != 0)
         {
             printf("Password yang anda masukkan tidak sama dengan yang sebelumnya.\n");
             return;
