@@ -2,6 +2,8 @@
 #include<stdlib.h>
 #include<string.h>
 #include<io.h>
+#include<direct.h>
+#include<unistd.h>
 #include<ctype.h>
 
     struct pengguna{
@@ -77,15 +79,25 @@
         printf("Halo!\n");
     }
    
-    void buatfolder(const char *folder_name) { 
-    if ( _access(folder_name, 0) == 0) 
-     printf("Folder %s sudah ada. Ga perlu buat lagi.\n", folder_name);
-    else 
-    if (_mkdir(folder_name) == 0) 
-     printf("Folder '%s' berhasil dibuat.\n", folder_name);
-    else 
-     perror("Error ges");
-    }
+    void buatfolder(const char *folder_name) {
+    #ifdef _WIN32  //ni kalau di windows
+        if (_access(folder_name, 0) == 0) 
+         printf("Folder %s sudah ada. Ga perlu buat lagi.\n", folder_name);
+        else
+        if (_mkdir(folder_name) == 0) 
+         printf("Folder '%s' berhasil dibuat.\n", folder_name);
+        else 
+         perror("Error ges");
+        }
+    #else //ni kalau di linux
+        if (access(folder_name, F_OK) == 0) 
+            printf("Folder %s sudah ada. Ga perlu buat lagi.\n", folder_name);
+        else 
+        if (mkdir(folder_name, 0777) == 0) 
+         printf("Folder '%s' berhasil dibuat.\n", folder_name);
+        else 
+         perror("Error ges");
+    #endif
 
 
     int main(int argc, char *argv[]){
