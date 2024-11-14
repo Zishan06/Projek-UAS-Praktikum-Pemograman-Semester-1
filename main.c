@@ -41,6 +41,10 @@
         fgets(penggunabaru.pass, sizeof(penggunabaru.pass), stdin);
         penggunabaru.pass[strcspn(penggunabaru.pass, "\n")] = '\0';
 
+        printf("konfirmasi password : ");
+        fgets(confirmPassword, sizeof(confirmPasword), stdin);
+        confirmPassword[strcspn(confirmPassword, "\n")] = '0';
+
         if (strcmp(confirmPassword, penggunabaru.pass) != 0)
         {
             printf("Password yang anda masukkan tidak sama dengan yang sebelumnya.\n");
