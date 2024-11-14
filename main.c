@@ -43,7 +43,7 @@
 
         printf("konfirmasi password : ");
         fgets(konfirpassword, sizeof(konfirpassword), stdin);
-        konfirpassword[strcspn(konfirpassword, "\n")] = '0';
+        konfirpassword[strcspn(konfirpassword, "\n")] = '\0';
 
         if (strcmp(konfirpassword, penggunabaru.pass) == 0)
         {
