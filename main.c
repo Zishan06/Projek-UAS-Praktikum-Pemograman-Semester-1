@@ -2,6 +2,7 @@
 #include<stdlib.h>
 #include<string.h>
 #include<ctype.h>
+#include<time.h>
 #ifdef _WIN32
     #include <io.h>
     #include<direct.h>
@@ -105,6 +106,37 @@
     #endif
     }
 
+    void acakSoal(int *skor, int *soalTampil, const char **soal, const char *pilihan[][4], int jumlahSoal, const int *jawabanBenar){
+        int indeks;
+        do
+        {
+            indeks = rand() % jumlahSoal;
+        } while (soalTampil[indeks] == 1);
+
+        soalTampil[indeks] = 1;
+
+        printf("%s\n", soal[indeks]);
+        for (int i = 0; i < 4; i++)
+        {
+            printf("%d. %s\n", i + 1, pilihan[indeks][i]);
+        }
+
+        int jawabanPengguna;
+        printf("Pilihlah jawaban dari (1 - 4) : ");
+        scanf("%d", &jawabanPengguna);
+
+        if (jawabanPengguna - 1 == jawabanBenar[indeks])
+        {
+            printf("Jawaban Benar!\n");
+            *skor = *skor + 20;
+        }
+        else
+        {
+            printf("Jawaban Salah!\nJawaban yang benar adalah %s\n", pilihan[indeks][jawabanBenar[indeks]]);
+        }
+        printf("\n");
+    }
+
 
     int main(int argc, char *argv[]){
         if(argc < 2){
@@ -116,11 +148,16 @@
             
         } else if(strcmp(argv[1], "login")==0 && argc==4) {
 
-            struct pengguna user[10];
+            struct pengguna user[14];
             char binfile[100];
             FILE *file = fopen("database/login.bin", "rb");
+            if (file == NULL)
+            {
+                perror("Error ges");
+                exit(1);
+            }
             int i=0;
-            while(fgets(binfile, sizeof(binfile), file) && i < 10){
+            while(fgets(binfile, sizeof(binfile), file) && i < 14){
                 sscanf(binfile, "%[^#]#%[^=]=%d\n", user[i].username, user[i].pass, &user[i].score);
                 i++;
             }
@@ -128,7 +165,7 @@
 
             int isCorrect=0;
             struct pengguna player;
-            for(i=0; i<10; i++) {
+            for(i=0; i<14; i++) {
                 if(strcmp(argv[2], user[i].username)==0) {
                     isCorrect++;
                     if(strcmp(argv[3], user[i].pass)==0) { 
@@ -144,8 +181,82 @@
                 }
             }
             if(isCorrect==2) {
+                srand(time(NULL));
+                player.score = 0;
+                
                 printf("selamat datang %s\nScore saat ini: %d\n", player.username, player.score);
-                printf("SOAL PERTAMA");
+                
+                const char *soal[] = {
+                    "Apa nama lautan terbesar di dunia?",
+                    "Planet terdekat dengan matahari adalah?",
+                    "Siapa presiden pertama amerika serikat?",
+                    "Berapakah jumlah warna untuk pelangi?",
+                    "Siapa pelukis dari lukisan 'mona lisa'?",
+                    "Apa nama sungai terpanjang di dunia?",
+                    "Apa mata uang resmi jepang?",
+                    "Negara apa yang disebut dengan 'Negari Tirai Bambu'?",
+                    "Apa bahasa resmi di brazil?",
+                    "Berapa warna yang ada pada bendera italia?"};
+
+                const char *pilihan[][4] = {
+                    {"Samudra Atlantik", "Samudra Arktik", "Samudra Pasifik", "Samudra Hindia"},
+                    {"Venus", "Merkurius", "Mars", "Uranus"},
+                    {"George Washington", "Abraham Lincoln", "John Adams", "Thomas Jefferson"},
+                    {"5", "6", "7", "8"},
+                    {"Pablo Picasso", "Michelangelo", "Vincent van Gogh", "Leonardo da Vinci"},
+                    {"Amazon", "Nile", "Yangtze", "Mississippi"},
+                    {"Yuan", "Won", "Yen", "Dong"},
+                    {"Jepang", "China", "Korea Selatan", "Vietnam"},
+                    {"Portugis", "Spanyol", "Inggris", "Prancis"},
+                    {"3", "2", "4", "5"}};
+
+                const int jawabanBenar[] = {2, 1, 0, 2, 3, 1, 2, 1, 0, 0};
+
+                int jumlahSoal = sizeof(soal) / sizeof(soal[0]);
+
+                char lanjut;
+                int j = 0;
+                int soalTampil[jumlahSoal];
+
+                memset(soalTampil, 0, sizeof(soalTampil));
+
+                do
+                {
+                    j++;
+                    printf("Soal %d :\n", j);
+                    acakSoal(&player.score, soalTampil, soal, pilihan, jumlahSoal, jawabanBenar);
+
+                } while (j < 5);
+
+                printf("\nTerimakasih telah bermain!\nSkor akhir anda : %d\n", player.score);
+
+                FILE *updateFile = fopen("database/login.bin", "rb+");
+                if (updateFile == NULL)
+                {
+                    perror("Error ges");
+                    exit(1);
+                }
+
+                char baris[50];
+                int adaOrangnya = 0;
+                int k = 0;
+
+                while (fgets(baris, sizeof(baris), updateFile))
+                {
+                    sscanf(baris, "%[^#]#%[^=]=%d\n", user[k].username, user[k].pass, &user[k].score);
+
+                    if (strcmp(player.username, user[k].username) == 0)
+                    {
+                        adaOrangnya = 1;
+                        user[k].score = player.score;
+                        fseek(updateFile, -strlen(baris), SEEK_CUR);
+                        fprintf(updateFile, "%s#%s=%d\n", user[k].username, user[k].pass, user[k].score);
+                        break;
+                    }
+                    k++;
+                }
+                fclose(updateFile);
+                
             } else if (isCorrect == 0) {
                 printf("username tidak ditemukan\n");
                 exit(1);
