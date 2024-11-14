@@ -46,18 +46,16 @@
         printf("Password yang anda masukkan tidak sama dengan yang sebelumnya.\n");
         return;
         }
-        else
+         
+        FILE *regis = fopen("database/login.bin", "ab");
+        if (regis == NULL)
         {
-            FILE *regis = fopen("database/login.bin", "ab");
-            if (regis == NULL)
-            {
-                perror("Error ges");
-                exit(1);
-            }
-            fprintf(regis, "%s#%s=0\n", penggunabaru.username, penggunabaru.pass);
-            fclose(regis);
-            printf("Halo\n");
+            perror("Error ges");
+            exit(1);
         }
+        fprintf(regis, "%s#%s=0\n", penggunabaru.username, penggunabaru.pass);
+        fclose(regis);
+        printf("Halo!\n");
     }
    
     void createFolder(const char *folder_name) { 
