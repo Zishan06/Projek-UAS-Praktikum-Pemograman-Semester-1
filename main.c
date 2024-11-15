@@ -329,7 +329,11 @@
                             else {
                                 break;
                             }
-                        printf("%d. %s\t\t%.2lf\n", i+1, user[indexRank[i]].username, user[indexRank[i]].score);
+                        for(i = 0; i < 10; i++){
+                            if (strlen(user[indexRank[i]].username) >= 8){
+                                printf("%d. %s\t\t%.2lf\n", i+1, user[indexRank[i]].username, user[indexRank[i]].score);
+                            }
+                        }
                     }
                     #ifdef _WIN32 
                     Sleep(3); 
