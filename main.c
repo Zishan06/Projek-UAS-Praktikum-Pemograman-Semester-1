@@ -156,7 +156,7 @@
 
         int jumlahSoal = sizeof(soal) / sizeof(soal[0]);
         int soalTampil[jumlahSoal];
-        int soalPake = 20;
+        int soalPake = 10;
         double poinMaks = 100.0;
         double nilaiSoal = poinMaks / soalPake;
         memset(soalTampil, 0, sizeof(soalTampil));
