@@ -306,10 +306,10 @@
 
                     case 4:
                     printf("\nLEADERBOARD\nNAMA\t\t\tSCORE\n\n");
-                    int indexBiggest, indexRank[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+                    int indexBiggest, indexRank[14] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
                     for(int i=0; i<14; i++) {
                         indexBiggest = i;
-                        for(int j=i+1; j<10; j++) {
+                        for(int j=i+1; j<14; j++) {
                             if(user[indexBiggest].score < user[j].score && strlen(user[indexBiggest].username) > 0) {
                                 indexBiggest = j;
                             }
@@ -322,7 +322,7 @@
                     for(i=0; i<10; i++) {
             
                         if(strlen(user[indexRank[i]].username) <= 0) 
-                            if(strlen(user[indexRank[i+1]].username) > 0) {
+                            if(strlen(user[indexRank[i+1]].username) >= 8) {
                                 printf("%d. %s\t\t%.2lf\n", i+1, user[indexRank[i+1]].username, user[indexRank[i+1]].score);
                                 break;
                             }
