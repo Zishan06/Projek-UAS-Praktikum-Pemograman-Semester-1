@@ -189,12 +189,12 @@
 
             if (jawabanPengguna - 1 == jawabanBenar[indeks])
             {
-                printf("Jawaban Benar!");
+                printf("\033[33mJawaban Benar!\033[0m");
                 *skor += nilaiSoal;
             }
             else
             {
-                printf("Jawaban Salah!\nJawaban yang benar adalah %s\nANDA TERELIMINASI!!\n", pilihan[indeks][jawabanBenar[indeks]]);
+                printf("\033[31mJawaban Salah!\nANDA TERELIMINASI!!\n\033[0m\nJawaban yang benar adalah \033[32m%s\n\033[0m", pilihan[indeks][jawabanBenar[indeks]]);
                 break;
             }
             printf("\n");
@@ -306,32 +306,27 @@
 
                     case 4:
                     printf("\nLEADERBOARD\nNAMA\t\t\tSCORE\n\n");
-                    int indexBiggest, indexRank[14] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
-                    for(int i=0; i<14; i++) {
-                        indexBiggest = i;
-                        for(int j=i+1; j<14; j++) {
-                            if(user[indexBiggest].score < user[j].score && strlen(user[indexBiggest].username) > 0) {
-                                indexBiggest = j;
-                            }
+                    int indexRank[14] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+                    for (int i = 1; i < 14; i++) {
+                        int key = indexRank[i];
+                        int j = i - 1;
+                        while (j >= 0 && user[indexRank[j]].score < user[key].score) {
+                            indexRank[j + 1] = indexRank[j];
+                            j = j - 1;
                         }
-                        int temp = indexRank[i];
-                        indexRank[i] = indexRank[indexBiggest];
-                        indexRank[indexBiggest] = temp;
-                        
+                        indexRank[j + 1] = key;
                     }
                     for(i=0; i<10; i++) {
             
                         if(strlen(user[indexRank[i]].username) <= 0) 
-                            if(strlen(user[indexRank[i+1]].username) >= 8) {
-                                printf("%d. %s\t\t%.2lf\n", i+1, user[indexRank[i+1]].username, user[indexRank[i+1]].score);
-                                break;
-                            }
-                            else {
-                                break;
-                            }
+                            break;
                         for(i = 0; i < 10; i++){
                             if (strlen(user[indexRank[i]].username) >= 8){
+                                if(indexPengguna==indexRank[i]) {
+                                    printf("\033[33m");
+                                }
                                 printf("%d. %s\t\t%.2lf\n", i+1, user[indexRank[i]].username, user[indexRank[i]].score);
+                                printf("\033[0m");
                             }
                         }
                     }
