@@ -250,7 +250,7 @@
                 while(1){
                     printf("1. Mulai\n2. Credit\n3. Exit\n4. Daftar Score\n\nPilih (1 - 4) : ");
                     if(scanf("%d", &pilihan) != 1){
-                        while(getchar() != '\n';
+                        while(getchar() != '\n');
                         printf("\nInput tidak valid. Pilih (1 - 4) : ");
                         goto reset;
                     }
