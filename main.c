@@ -14,7 +14,7 @@
     struct pengguna{
         char username[14];
         char pass[14];
-        int score;
+        double score;
     };
     const char *folder_name = "database";
 
@@ -79,7 +79,7 @@
             perror("Error ges");
             exit(1);
         }
-        fprintf(regis, "%s#%s=0\n", penggunabaru.username, penggunabaru.pass);
+        fprintf(regis, "%s#%s=0.00\n", penggunabaru.username, penggunabaru.pass);
         fclose(regis);
         printf("Halo!\n");
     }
@@ -106,7 +106,7 @@
     #endif
     }
 
-    void soalQuiz(int *skor){
+    void soalQuiz(double *skor){
         const char *soal[] = {
             "Apa nama lautan terbesar di dunia?",
             "Planet terdekat dengan matahari adalah?",
@@ -135,9 +135,12 @@
 
         int jumlahSoal = sizeof(soal) / sizeof(soal[0]);
         int soalTampil[jumlahSoal];
+        int soalPake = 5;
+        double poinMaks = 100.0;
+        double nilaiSoal = poinMaks / soalPake;
         memset(soalTampil, 0, sizeof(soalTampil));
 
-        for(int j = 0; j < 5; j++){
+        for(int j = 0; j < soalPake; j++){
             int indeks;
             printf("Soal %d :\n", j+1);
             do
@@ -160,7 +163,7 @@
             if (jawabanPengguna - 1 == jawabanBenar[indeks])
             {
                 printf("Jawaban Benar!\n");
-                *skor = *skor + 20;
+                *skor += nilaiSoal;
             }
             else
             {
@@ -191,7 +194,7 @@
             }
             int i=0;
             while(fgets(binfile, sizeof(binfile), file) && i < 14){
-                sscanf(binfile, "%[^#]#%[^=]=%d\n", user[i].username, user[i].pass, &user[i].score);
+                sscanf(binfile, "%[^#]#%[^=]=%lf\n", user[i].username, user[i].pass, &user[i].score);
                 i++;
             }
             fclose(file);
@@ -215,12 +218,12 @@
             }
             if(isCorrect==2) {
                 srand(time(NULL));
-                printf("selamat datang %s\nScore saat ini: %d\n", player.username, player.score);
-                player.score = 0;
+                printf("selamat datang %s\nScore saat ini: %.2lf\n", player.username, player.score);
+                player.score = 0.00;
 
                 soalQuiz(&player.score);
 
-                printf("\nTerimakasih telah bermain!\nSkor akhir anda : %d\n", player.score);
+                printf("\nTerimakasih telah bermain!\nSkor akhir anda : %.2lf\n", player.score);
 
                 FILE *updateFile = fopen("database/login.bin", "rb+");
                 if (updateFile == NULL)
@@ -235,14 +238,14 @@
 
                 while (fgets(baris, sizeof(baris), updateFile))
                 {
-                    sscanf(baris, "%[^#]#%[^=]=%d\n", user[k].username, user[k].pass, &user[k].score);
+                    sscanf(baris, "%[^#]#%[^=]=%lf\n", user[k].username, user[k].pass, &user[k].score);
 
                     if (strcmp(player.username, user[k].username) == 0)
                     {
                         adaOrangnya = 1;
                         user[k].score = player.score;
                         fseek(updateFile, -strlen(baris), SEEK_CUR);
-                        fprintf(updateFile, "%s#%s=%d\n", user[k].username, user[k].pass, user[k].score);
+                        fprintf(updateFile, "%s#%s=%.2lf\n", user[k].username, user[k].pass, user[k].score);
                         break;
                     }
                     k++;
