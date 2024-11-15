@@ -29,6 +29,11 @@
         fgets(penggunabaru.username, sizeof(penggunabaru.username), stdin);
         penggunabaru.username[strcspn(penggunabaru.username, "\n")] = '\0';
 
+        if(strlen(penggunabaru.username) < 8 || strlen(penggunabaru.username) > 12){
+            printf("Password harus minimal 8 karakter dan maksimal 12 karakter.\n");
+            return;
+        }
+
         FILE *checkfile = fopen("database/login.bin", "rb");
         if (checkfile != NULL)
         {
@@ -51,7 +56,7 @@
         penggunabaru.pass[strcspn(penggunabaru.pass, "\n")] = '\0';
 
         if(strlen(penggunabaru.pass) < 8 || strlen(penggunabaru.pass) > 12){
-            printf("Password harus minimal 8 dan maksimal 12.\n");
+            printf("Password harus minimal 8 karakter dan maksimal 12 karakter.\n");
             return;
         }
 
