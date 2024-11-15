@@ -280,11 +280,7 @@
 
                     while (fgets(baris, sizeof(baris), updateFile))
                     {
-                        int count = sscanf(baris, "%[^#]#%[^=]=%lf\n", user[k].username, user[k].pass, &user[k].score);
-                        if(count != 3)
-                            continue;
-
-                        if (k==indexPengguna)
+                        if(k == indexPengguna)
                         {
                             adaOrangnya = 1;
                             fseek(updateFile, -strlen(baris), SEEK_CUR);
@@ -311,7 +307,7 @@
                     case 4:
                     printf("\nDaftar Score:\nNAMA\t\t\tSCORE\n\n");
                     for(int i=0; i<14; i++) {
-                        if(strcmp(user[i].username, "") == 0) 
+                        if(strcmp(user[i].username, NULL) == 0) 
                             break;
                         printf("%s\t\t%2.lf\n", user[i].username, user[i].score);
                     }
