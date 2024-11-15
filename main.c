@@ -172,7 +172,7 @@
             soalTampil[indeks] = 1;
 
             printf("%s\n", soal[indeks]);
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 4; i++)
             {
                 printf("%d. %s\n", i + 1, pilihan[indeks][i]);
             }
