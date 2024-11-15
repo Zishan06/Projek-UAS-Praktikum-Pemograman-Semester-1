@@ -305,11 +305,31 @@
                     exit(1);
 
                     case 4:
-                    printf("\nDaftar Score:\nNAMA\t\t\tSCORE\n\n");
+                    printf("\nLEADERBOARD\nNAMA\t\t\tSCORE\n\n");
+                    int indexBiggest, indexRank[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
                     for(int i=0; i<14; i++) {
-                        if(strcmp(user[i].username, NULL) == 0) 
-                            break;
-                        printf("%s\t\t%2.lf\n", user[i].username, user[i].score);
+                        indexBiggest = i;
+                        for(int j=i+1; j<10; j++) {
+                            if(user[indexBiggest].score < user[j].score && strlen(user[indexBiggest].username) > 0) {
+                                indexBiggest = j;
+                            }
+                        }
+                        int temp = indexRank[i];
+                        indexRank[i] = indexRank[indexBiggest];
+                        indexRank[indexBiggest] = temp;
+                        
+                    }
+                    for(i=0; i<10; i++) {
+            
+                        if(strlen(user[indexRank[i]].username) <= 0) 
+                            if(strlen(user[indexRank[i+1]].username) > 0) {
+                                printf("%d. %s\t\t%.2lf\n", i+1, user[indexRank[i+1]].username, user[indexRank[i+1]].score);
+                                break;
+                            }
+                            else {
+                                break;
+                            }
+                        printf("%d. %s\t\t%.2lf\n", i+1, user[indexRank[i]].username, user[indexRank[i]].score);
                     }
                     #ifdef _WIN32 
                     Sleep(3); 
