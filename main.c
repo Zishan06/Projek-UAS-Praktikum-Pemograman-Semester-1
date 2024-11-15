@@ -164,7 +164,7 @@
 
         for(int j = 0; j < soalPake; j++){
             int indeks;
-            printf("Soal %d :\n", j+1);
+            printf("\nSoal %d :\n", j+1);
             do
             {
                 indeks = rand() % jumlahSoal;
@@ -184,12 +184,12 @@
 
             if (jawabanPengguna - 1 == jawabanBenar[indeks])
             {
-                printf("Jawaban Benar!\n");
+                printf("Jawaban Benar!");
                 *skor += nilaiSoal;
             }
             else
             {
-                printf("Jawaban Salah!\nJawaban yang benar adalah %s\nANDA TERELIMINASI", pilihan[indeks][jawabanBenar[indeks]]);
+                printf("Jawaban Salah!\nJawaban yang benar adalah %s\nANDA TERELIMINASI!!\n", pilihan[indeks][jawabanBenar[indeks]]);
                 break;
             }
             printf("\n");
@@ -240,9 +240,22 @@
                 srand(time(NULL));
                 menu:
                 printf("\nSelamat datang %s\nScore saat ini: %.2lf\n\n", user[indexPengguna].username, user[indexPengguna].score);
-                printf("1. Mulai\n2. Credit\n3. Exit\n4. Daftar Score\n\n");
+                reset:
                 int pilihan;
-                scanf("%d", &pilihan);
+                while(1){
+                    printf("1. Mulai\n2. Credit\n3. Exit\n4. Daftar Score\n\nPilih (1 - 4) : ");
+                    if(scanf("%d", &pilihan) != 1){
+                        while(getchar() != '\n';
+                        printf("\nInput tidak valid. Pilih (1 - 4) : ");
+                        goto reset;
+                    }
+                    if(pilihan < 1 || pilihan > 4){
+                        printf("\nPilihan tidak valid. Pilih (1 - 4) : ");
+                        goto reset;
+                    }
+                    break;
+                }
+                         
                 switch(pilihan) {
                     case 1:
                     user[indexPengguna].score = 0.00;
@@ -262,7 +275,9 @@
 
                     while (fgets(baris, sizeof(baris), updateFile))
                     {
-                        sscanf(baris, "%[^#]#%[^=]=%lf\n", user[k].username, user[k].pass, &user[k].score);
+                        int count = sscanf(baris, "%[^#]#%[^=]=%lf\n", user[k].username, user[k].pass, &user[k].score);
+                        if(count != 3)
+                            continue;
 
                         if (k==indexPengguna)
                         {
@@ -289,7 +304,7 @@
                     exit(1);
 
                     case 4:
-                    printf("\nDaftar Score:\nNAMA\t\tSCORE\n\n");
+                    printf("\nDaftar Score:\nNAMA\t\t\tSCORE\n\n");
                     for(int i=0; i<14; i++) {
                         if(strcmp(user[i].username, "") == 0) 
                             break;
@@ -303,8 +318,7 @@
                     goto menu;
 
                 }
-
-                
+            
             } else if (isCorrect == 0) {
                 printf("username tidak ditemukan\n");
                 exit(1);
