@@ -4,6 +4,7 @@
 #include<ctype.h>
 #include<time.h>
 #ifdef _WIN32
+    #include<Windows.h>
     #include <io.h>
     #include<direct.h>
 #else
@@ -188,13 +189,12 @@
             }
             else
             {
-                printf("Jawaban Salah!\nJawaban yang benar adalah %s\n", pilihan[indeks][jawabanBenar[indeks]]);
+                printf("Jawaban Salah!\nJawaban yang benar adalah %s\nANDA TERELIMINASI", pilihan[indeks][jawabanBenar[indeks]]);
+                break;
             }
             printf("\n");
         }    
     }
-
-
     int main(int argc, char *argv[]){
         if(argc < 2){
             printf("Selamat datang di game paling gacor, silahkan ikuti petunjuk command line di bawah untuk lanjut :3, coba:\n-> ./main register\n-> ./main login (username) (password)\n");
@@ -221,15 +221,14 @@
             fclose(file);
 
             int isCorrect=0;
-            struct pengguna player;
+            int indexPengguna;
+            
             for(i=0; i<14; i++) {
                 if(strcmp(argv[2], user[i].username)==0) {
                     isCorrect++;
                     if(strcmp(argv[3], user[i].pass)==0) { 
                         isCorrect++;
-                        strcpy(player.username, user[i].username);
-                        strcpy(player.pass, user[i].pass);
-                        player.score = user[i].score;
+                        indexPengguna = i;
                         break;
                     } else {
                         printf("Password anda salah\n");
@@ -239,39 +238,73 @@
             }
             if(isCorrect==2) {
                 srand(time(NULL));
-                printf("selamat datang %s\nScore saat ini: %.2lf\n", player.username, player.score);
-                player.score = 0.00;
+                menu:
+                printf("\nSelamat datang %s\nScore saat ini: %.2lf\n\n", user[indexPengguna].username, user[indexPengguna].score);
+                printf("1. Mulai\n2. Credit\n3. Exit\n4. Daftar Score\n\n");
+                int pilihan;
+                scanf("%d", &pilihan);
+                switch(pilihan) {
+                    case 1:
+                    user[indexPengguna].score = 0.00;
+                    soalQuiz(&user[indexPengguna].score);
+                    printf("\nTerimakasih telah bermain!\nSkor akhir anda : %.2lf\n", user[indexPengguna].score);
 
-                soalQuiz(&player.score);
-
-                printf("\nTerimakasih telah bermain!\nSkor akhir anda : %.2lf\n", player.score);
-
-                FILE *updateFile = fopen("database/login.bin", "rb+");
-                if (updateFile == NULL)
-                {
-                    perror("Error ges");
-                    exit(1);
-                }
-
-                char baris[50];
-                int adaOrangnya = 0;
-                int k = 0;
-
-                while (fgets(baris, sizeof(baris), updateFile))
-                {
-                    sscanf(baris, "%[^#]#%[^=]=%lf\n", user[k].username, user[k].pass, &user[k].score);
-
-                    if (strcmp(player.username, user[k].username) == 0)
+                    FILE *updateFile = fopen("database/login.bin", "rb+");
+                    if (updateFile == NULL)
                     {
-                        adaOrangnya = 1;
-                        user[k].score = player.score;
-                        fseek(updateFile, -strlen(baris), SEEK_CUR);
-                        fprintf(updateFile, "%s#%s=%.2lf\n", user[k].username, user[k].pass, user[k].score);
-                        break;
+                        perror("Error ges");
+                        exit(1);
                     }
-                    k++;
+
+                    char baris[50];
+                    int adaOrangnya = 0;
+                    int k = 0;
+
+                    while (fgets(baris, sizeof(baris), updateFile))
+                    {
+                        sscanf(baris, "%[^#]#%[^=]=%lf\n", user[k].username, user[k].pass, &user[k].score);
+
+                        if (k==indexPengguna)
+                        {
+                            adaOrangnya = 1;
+                            fseek(updateFile, -strlen(baris), SEEK_CUR);
+                            fprintf(updateFile, "%s#%s=%.2lf\n", user[k].username, user[k].pass, user[indexPengguna].score);
+                            break;
+                        }
+                        k++;
+                    }
+                    fclose(updateFile);
+                    break;
+
+                    case 2:
+                    printf("\nGame ini adalah projek dari bang Ganang SETYO HADI APALAH NYUSAHIN ORANG AJAHHHH:(\n");
+                    #ifdef _WIN32 
+                        Sleep(5); 
+                    #else 
+                        usleep(5000000); 
+                    #endif
+                    goto menu;
+
+                    case 3:
+                    exit(1);
+
+                    case 4:
+                    printf("\nDaftar Score:\nNAMA\t\tSCORE\n\n");
+                    for(int i=0; i<14; i++) {
+                        if(strcmp(user[i].username, "") == 0) 
+                            break;
+                        printf("%s\t\t%2.lf\n", user[i].username, user[i].score);
+                    }
+                    #ifdef _WIN32 
+                    Sleep(3); 
+                    #else 
+                    sleep(3); 
+                    #endif
+                    goto menu;
+
                 }
-                fclose(updateFile);
+
+                
             } else if (isCorrect == 0) {
                 printf("username tidak ditemukan\n");
                 exit(1);
@@ -281,4 +314,5 @@
             printf(" Format CLA tidak sesuai, coba:\n-> ./main register\n-> ./main login (username) (password)\n");
         }
     return 0;
-}
+    } 
+    
