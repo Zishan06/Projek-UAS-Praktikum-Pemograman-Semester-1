@@ -24,7 +24,7 @@
         char konfirpassword[14];
     
         printf("===============================================================\n");
-        printf("|| Selamat datang di game paling gacor maxwinn777!            ||\n|| Ketik Username dan password untuk mendaftar.               ||\n");
+        printf("|| Selamat datang di game TWK (Tes Wawasan Kematian)!            ||\n|| Ketik Username dan password untuk mendaftar.               ||\n");
         printf("===============================================================\n\n");
         
         printf("-> Masukkan username     : ");
