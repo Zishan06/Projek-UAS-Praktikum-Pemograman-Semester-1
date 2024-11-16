@@ -71,7 +71,7 @@
             }
         }
 
-        printf("-> konfirmasi password   : ");
+        printf("-> konfirmasi password  : ");
         fgets(konfirpassword, sizeof(konfirpassword), stdin);
         konfirpassword[strcspn(konfirpassword, "\n")] = '\0';
 
