@@ -251,8 +251,8 @@
                 srand(time(NULL));
                 menu:
                 printf("\nSelamat datang %s\nScore saat ini: %.2lf\n\n", user[indexPengguna].username, user[indexPengguna].score);
-                reset:
                 int pilihan;
+                reset:
                 while(1){
                     printf("1. Mulai\n2. Credit\n3. Exit\n4. Daftar Score\n\nPilih (1 - 4) : ");
                     if(scanf("%d", &pilihan) != 1){
