@@ -23,9 +23,11 @@
         struct pengguna penggunabaru;
         char konfirpassword[14];
     
-        printf("Selamat datang di game paling gacor maxwinn777\nKetik Username dan password untuk mendaftar\n");
+        printf("===============================================================\n");
+        printf("|| Selamat datang di game paling gacor maxwinn777!            ||\n|| Ketik Username dan password untuk mendaftar.               ||\n");
+        printf("===============================================================\n\n");
         
-        printf("Masukkan username : ");
+        printf("-> Masukkan username     : ");
         fgets(penggunabaru.username, sizeof(penggunabaru.username), stdin);
         penggunabaru.username[strcspn(penggunabaru.username, "\n")] = '\0';
 
@@ -51,7 +53,7 @@
             fclose(checkfile);
         }
             
-        printf("Masukkan password : ");
+        printf("->Masukkan password     : ");
         fgets(penggunabaru.pass, sizeof(penggunabaru.pass), stdin);
         penggunabaru.pass[strcspn(penggunabaru.pass, "\n")] = '\0';
 
@@ -69,7 +71,7 @@
             }
         }
 
-        printf("konfirmasi password : ");
+        printf("-> konfirmasi password   : ");
         fgets(konfirpassword, sizeof(konfirpassword), stdin);
         konfirpassword[strcspn(konfirpassword, "\n")] = '\0';
 
@@ -87,7 +89,9 @@
         }
         fprintf(regis, "%s#%s=0.00\n", penggunabaru.username, penggunabaru.pass);
         fclose(regis);
-        printf("Halo!\n");
+        printf("\n=================================================================\n");
+        printf("|| ----------------------------Halo!-------------------------- ||\n");
+        printf("=================================================================\n");
     }
    
     void buatfolder(const char *folder_name) {
@@ -202,7 +206,9 @@
     }
     int main(int argc, char *argv[]){
         if(argc < 2){
-            printf("Selamat datang di game paling gacor, silahkan ikuti petunjuk command line di bawah untuk lanjut :3, coba:\n-> ./main register\n-> ./main login (username) (password)\n");
+            printf("===============================================================================================================\n");
+            printf("|| Selamat datang di game paling gacor, silahkan ikuti petunjuk command line di bawah untuk lanjut :3, coba: ||\n|| -> ./main register                                                                                        ||\n|| -> ./main login (username) (password)                                                                     ||\n");
+            printf("===============================================================================================================\n");
         }
         else if(strcmp(argv[1], "register")==0 && argc == 2) {
             buatfolder(folder_name);
@@ -345,7 +351,9 @@
             }
         }
         else {
-            printf(" Format CLA tidak sesuai, coba:\n-> ./main register\n-> ./main login (username) (password)\n");
+            printf("=========================================================\n");
+            printf("|| Format CLA tidak sesuai, coba:                      ||\n|| -> ./main register                                  ||\n|| -> ./main login (username) (password)               ||\n");
+            printf("=========================================================");
         }
     return 0;
     } 
