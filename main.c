@@ -207,7 +207,7 @@
     int main(int argc, char *argv[]){
         if(argc < 2){
             printf("===============================================================================================================\n");
-            printf("|| Selamat datang di game paling gacor, silahkan ikuti petunjuk command line di bawah untuk lanjut :3, coba: ||\n|| -> ./main register                                                                                        ||\n|| -> ./main login (username) (password)                                                                     ||\n");
+            printf("|| Selamat datang di game paling gacor, silahkan ikuti petunjuk command line di bawah untuk lanjut :3, coba: ||\n\n|| -> ./main register                                                                                        ||\n|| -> ./main login (username) (password)                                                                     ||\n");
             printf("===============================================================================================================\n");
         }
         else if(strcmp(argv[1], "register")==0 && argc == 2) {
@@ -352,7 +352,7 @@
         }
         else {
             printf("=========================================================\n");
-            printf("|| Format CLA tidak sesuai, coba:                      ||\n|| -> ./main register                                  ||\n|| -> ./main login (username) (password)               ||\n");
+            printf("|| Format CLA tidak sesuai, coba:                      ||\n\n|| -> ./main register                                  ||\n|| -> ./main login (username) (password)               ||\n");
             printf("=========================================================");
         }
     return 0;
