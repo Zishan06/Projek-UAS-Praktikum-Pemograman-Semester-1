@@ -227,6 +227,8 @@
             int i=0;
             while(fgets(binfile, sizeof(binfile), file) && i < 14){
                 sscanf(binfile, "%[^#]#%[^=]=%lf\n", user[i].username, user[i].pass, &user[i].score);
+                user[i].username[strcspn(user[i].username,"\n")] ='\0';
+                user[i].pass[strcspn(user[i].pass, "\n")] = '\0';
                 i++;
             }
             fclose(file);
@@ -247,21 +249,21 @@
                     }
                 }
             }
+            int pilihan;
             if(isCorrect==2) {
                 srand(time(NULL));
                 menu:
                 printf("\nSelamat datang %s\nScore saat ini: %.2lf\n\n", user[indexPengguna].username, user[indexPengguna].score);
-                int pilihan;
                 reset:
                 while(1){
                     printf("1. Mulai\n2. Credit\n3. Exit\n4. Daftar Score\n\nPilih (1 - 4) : ");
                     if(scanf("%d", &pilihan) != 1){
                         while(getchar() != '\n');
-                        printf("\nInput tidak valid. Pilih (1 - 4) : ");
+                        printf("\nInput tidak valid. Pilih (1 - 4) :\n ");
                         goto reset;
                     }
                     if(pilihan < 1 || pilihan > 4){
-                        printf("\nPilihan tidak valid. Pilih (1 - 4) : ");
+                        printf("\nPilihan tidak valid. Pilih (1 - 4) :\n ");
                         goto reset;
                     }
                     break;
