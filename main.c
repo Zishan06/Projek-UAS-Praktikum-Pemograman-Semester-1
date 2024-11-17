@@ -227,8 +227,6 @@
             int i=0;
             while(fgets(binfile, sizeof(binfile), file) && i < 14){
                 sscanf(binfile, "%[^#]#%[^=]=%lf\n", user[i].username, user[i].pass, &user[i].score);
-                user[i].username[strcspn(user[i].username,"\n")] ='\0';
-                user[i].pass[strcspn(user[i].pass, "\n")] = '\0';
                 i++;
             }
             fclose(file);
