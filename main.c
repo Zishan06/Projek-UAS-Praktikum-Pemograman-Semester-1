@@ -425,14 +425,12 @@ void soalQuiz2(double *skor){
                     }
 
                     char baris[50];
-                    int adaOrangnya = 0;
                     int k = 0;
 
                     while (fgets(baris, sizeof(baris), updateFile))
                     {
                         if(k == indexPengguna)
                         {
-                            adaOrangnya = 1;
                             fseek(updateFile, -strlen(baris), SEEK_CUR);
                             fprintf(updateFile, "%s#%s=%.2lf\n", user[k].username, user[k].pass, user[indexPengguna].score);
                             break;
