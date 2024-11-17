@@ -116,7 +116,7 @@
     #endif
     }
 
-    void soalQuiz(double *skor){
+    void soalQuiz(double *skor, int mode){
         
         const char *soal[] = {
             "Apa nama lautan terbesar di dunia?",
@@ -125,7 +125,20 @@
             "Berapakah jumlah warna untuk pelangi?",
             "Siapa pelukis dari lukisan 'mona lisa'?",
             "Apa nama sungai terpanjang di dunia?",
-            "Apa mata uang resmi jepang?"};
+            "Apa mata uang resmi jepang?",
+            "Negara apa yang disebut dengan 'Negari Tirai Bambu'?",
+            "Apa bahasa resmi di brazil?",
+            "Berapa warna yang ada pada bendera italia?",
+            "apabila nun mati atau tanwin bertemu dengan huruf fa maka hukumnya?",
+            "di bawah ini yang termasuk sifat mustahil nabi adalah?",
+            "ada berapa sifat wajib Allah?",
+            "siapa nama dosen kece kelas b?",
+            "syifa ngecrushin doi selama 2 tahun, ternyata doi udah punya pacar, tapi ga dipost aja. tebak berapa hts syifa sekarang?",
+            "7 ekor buaya dikali 3, berapa total buaya sekarang?",
+            "5 x 4 + 3 : 100 + kamu sama yang lain = ?",
+            "berapa banyak rukun shalat?",
+            "di tahan sakit, di keluarin malu, apakah gerangan?",
+            "berapa banyak rukun islam?"};
 
         const char *pilihan[][4] = {
             {"Samudra Atlantik", "Samudra Arktik", "Samudra Pasifik", "Samudra Hindia"},
@@ -134,39 +147,72 @@
             {"5", "6", "7", "8"},
             {"Pablo Picasso", "Michelangelo", "Vincent van Gogh", "Leonardo da Vinci"},
             {"Amazon", "Nile", "Yangtze", "Mississippi"},
-            {"Yuan", "Won", "Yen", "Dong"}};
+            {"Yuan", "Won", "Yen", "Dong"},
+            {"Jepang", "China", "Korea Selatan", "Vietnam"},
+            {"Portugis", "Spanyol", "Inggris", "Prancis"},
+            {"3", "2", "4", "5"},
+            {"ikhfa", "iqlab", "mad asli", "saktah"},
+            {"sidik", "amanah", "kadzib", "tablig"},
+            {"15", "20", "1", "10"},
+            {"pak mahyus", "pak taufiq", "s14p4 y4ch?", "pak alim<3"},
+            {"0 lah bjir stay halal!!", "keknya si 4 yah", "1 fakultas sie", "otw cari tuh"},
+            {"21", "4", "10", "15"},
+            {"aku yo ngoding lah ;p", "10+ hts", "23", "aku ma siapa? </3 :("},
+            {"10", "11", "9", "13" },
+            {"kentut anjay", "rasa cintaku padanya", "jawab nomor 2", "kentut tapi ga bunyi"},
+            {"6", "5","2", "3"}};
 
-        const int jawabanBenar[] = {2, 1, 0, 2, 3, 1, 2};
+        const int jawabanBenar[] = {2, 1, 0, 2, 3, 1, 2, 1, 0, 0, 0, 2, 1, 3, 0, 2, 0, 3, 0, 1};
+        const int sulittidak[] = {1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0};
+
 
         int jumlahSoal = sizeof(soal) / sizeof(soal[0]);
         int soalTampil[jumlahSoal];
-        int soalPake = 7;
+        int soalPake;
+        int sulit=0, biasa=0, maxSulit, maxBiasa;
         double poinMaks = 100.0;
         double nilaiSoal[jumlahSoal];
         memset(soalTampil, 0, sizeof(soalTampil));
 
-         for (int i = 0; i < jumlahSoal; i++) {
-        if (i < 3) {  
-            nilaiSoal[i] = 20.0;
-        } else {  
-            nilaiSoal[i] = 10.0;
+        switch (mode) {
+            case 1:
+                maxSulit = 0;
+                maxBiasa = 10;
+                break;
+            case 2:
+                maxSulit = 3;
+                maxBiasa = 4;
+                break;
+            case 3:
+                maxSulit = 7;
+                maxBiasa = 0;
+                break;
         }
-    }
+        soalPake = maxBiasa + maxSulit;
 
         for(int j = 0; j < soalPake; j++){
             int indeks;
             printf("\nSoal %d :\n", j+1);
+            
             do
             {
+                acakulang:
                 indeks = rand() % jumlahSoal;
+                if(sulittidak[indeks]==1 && sulit==maxSulit) 
+                    goto acakulang;
+                if(sulittidak[indeks]==0 && biasa==maxBiasa)
+                    goto acakulang;
+                
             } while (soalTampil[indeks] == 1);
 
             soalTampil[indeks] = 1;
+            (sulittidak[indeks]==1) ? sulit++ : biasa++;
 
             printf("%s\n", soal[indeks]);
             for (int i = 0; i < 4; i++)
             {
                 printf("%d. %s\n", i + 1, pilihan[indeks][i]);
+        
             }
 
             int jawabanPengguna;
@@ -176,7 +222,7 @@
             if (jawabanPengguna - 1 == jawabanBenar[indeks])
             {
                 printf("\033[33mJawaban Benar!\033[0m");
-                *skor += nilaiSoal[indeks];
+                *skor += (sulittidak[indeks]==1) ? 20.00 : 10.00;
             }
             else
             {
@@ -187,148 +233,6 @@
         }    
     }
 
-void soalQuiz2(double *skor){
-        
-        const char *soal[] = {
-            "Apa nama lautan terbesar di dunia?",
-            "Planet terdekat dengan matahari adalah?",
-            "Siapa presiden pertama amerika serikat?",
-            "Berapakah jumlah warna untuk pelangi?",
-            "Siapa pelukis dari lukisan 'mona lisa'?",
-            "Apa nama sungai terpanjang di dunia?",
-            "Apa mata uang resmi jepang?"};
-
-        const char *pilihan[][4] = {
-            {"Samudra Atlantik", "Samudra Arktik", "Samudra Pasifik", "Samudra Hindia"},
-            {"Venus", "Merkurius", "Mars", "Uranus"},
-            {"George Washington", "Abraham Lincoln", "John Adams", "Thomas Jefferson"},
-            {"5", "6", "7", "8"},
-            {"Pablo Picasso", "Michelangelo", "Vincent van Gogh", "Leonardo da Vinci"},
-            {"Amazon", "Nile", "Yangtze", "Mississippi"},
-            {"Yuan", "Won", "Yen", "Dong"}};
-
-        const int jawabanBenar[] = {2, 1, 0, 2, 3, 1, 2};
-
-        int jumlahSoal = sizeof(soal) / sizeof(soal[0]);
-        int soalTampil[jumlahSoal];
-        int soalPake = 7;
-        double poinMaks = 100.0;
-        double nilaiSoal[jumlahSoal];
-        memset(soalTampil, 0, sizeof(soalTampil));
-
-         for (int i = 0; i < jumlahSoal; i++) {
-        if (i < 3) {  
-            nilaiSoal[i] = 20.0;
-        } else {  
-            nilaiSoal[i] = 10.0;
-        }
-    }
-
-        for(int j = 0; j < soalPake; j++){
-            int indeks;
-            printf("\nSoal %d :\n", j+1);
-            do
-            {
-                indeks = rand() % jumlahSoal;
-            } while (soalTampil[indeks] == 1);
-
-            soalTampil[indeks] = 1;
-
-            printf("%s\n", soal[indeks]);
-            for (int i = 0; i < 4; i++)
-            {
-                printf("%d. %s\n", i + 1, pilihan[indeks][i]);
-            }
-
-            int jawabanPengguna;
-            printf("Pilihlah jawaban dari (1 - 4) : ");
-            scanf("%d", &jawabanPengguna);
-
-            if (jawabanPengguna - 1 == jawabanBenar[indeks])
-            {
-                printf("\033[33mJawaban Benar!\033[0m");
-                *skor += nilaiSoal[indeks];
-            }
-            else
-            {
-                printf("\033[31mJawaban Salah!\nANDA TERELIMINASI!!\n\033[0m\nJawaban yang benar adalah \033[32m%s\n\033[0m", pilihan[indeks][jawabanBenar[indeks]]);
-                break;
-            }
-            printf("\n");
-        }    
-    }
-
-
-    void soalQuiz3(double *skor){
-        
-        const char *soal[] = {
-            "Apa nama lautan terbesar di dunia?",
-            "Planet terdekat dengan matahari adalah?",
-            "Siapa presiden pertama amerika serikat?",
-            "Berapakah jumlah warna untuk pelangi?",
-            "Siapa pelukis dari lukisan 'mona lisa'?",
-            "Apa nama sungai terpanjang di dunia?",
-            "Apa mata uang resmi jepang?"};
-
-        const char *pilihan[][4] = {
-            {"Samudra Atlantik", "Samudra Arktik", "Samudra Pasifik", "Samudra Hindia"},
-            {"Venus", "Merkurius", "Mars", "Uranus"},
-            {"George Washington", "Abraham Lincoln", "John Adams", "Thomas Jefferson"},
-            {"5", "6", "7", "8"},
-            {"Pablo Picasso", "Michelangelo", "Vincent van Gogh", "Leonardo da Vinci"},
-            {"Amazon", "Nile", "Yangtze", "Mississippi"},
-            {"Yuan", "Won", "Yen", "Dong"}};
-
-        const int jawabanBenar[] = {2, 1, 0, 2, 3, 1, 2};
-
-        int jumlahSoal = sizeof(soal) / sizeof(soal[0]);
-        int soalTampil[jumlahSoal];
-        int soalPake = 7;
-        double poinMaks = 100.0;
-        double nilaiSoal[jumlahSoal];
-        memset(soalTampil, 0, sizeof(soalTampil));
-
-         for (int i = 0; i < jumlahSoal; i++) {
-        if (i < 3) {  
-            nilaiSoal[i] = 20.0;
-        } else {  
-            nilaiSoal[i] = 10.0;
-        }
-    }
-
-        for(int j = 0; j < soalPake; j++){
-            int indeks;
-            printf("\nSoal %d :\n", j+1);
-            do
-            {
-                indeks = rand() % jumlahSoal;
-            } while (soalTampil[indeks] == 1);
-
-            soalTampil[indeks] = 1;
-
-            printf("%s\n", soal[indeks]);
-            for (int i = 0; i < 4; i++)
-            {
-                printf("%d. %s\n", i + 1, pilihan[indeks][i]);
-            }
-
-            int jawabanPengguna;
-            printf("Pilihlah jawaban dari (1 - 4) : ");
-            scanf("%d", &jawabanPengguna);
-
-            if (jawabanPengguna - 1 == jawabanBenar[indeks])
-            {
-                printf("\033[33mJawaban Benar!\033[0m");
-                *skor += nilaiSoal[indeks];
-            }
-            else
-            {
-                printf("\033[31mJawaban Salah!\nANDA TERELIMINASI!!\n\033[0m\nJawaban yang benar adalah \033[32m%s\n\033[0m", pilihan[indeks][jawabanBenar[indeks]]);
-                break;
-            }
-            printf("\n");
-        }    
-    }
 
     int main(int argc, char *argv[]){
         if(argc < 2){
@@ -399,21 +303,7 @@ void soalQuiz2(double *skor){
                     printf("1.easy 2.normal 3.hard\n");
                     printf("pilih mode : ");
                     scanf("%d", &pilihmode);
-
-                    switch(pilihmode){
-                        case 1:
-                        soalQuiz(&user[indexPengguna].score);
-                        break;
-
-                        case 2:
-                        soalQuiz2(&user[indexPengguna].score);
-                        break;
-
-                        case 3:
-                        soalQuiz3(&user[indexPengguna].score);
-                        break;
-                        
-                        }
+                    soalQuiz(&user[indexPengguna].score, pilihmode);
     
                     printf("\nTerimakasih telah bermain!\nSkor akhir anda : %.2lf\n", user[indexPengguna].score);
 
