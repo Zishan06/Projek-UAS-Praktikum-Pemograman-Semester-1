@@ -136,7 +136,7 @@
             {"Amazon", "Nile", "Yangtze", "Mississippi"},
             {"Yuan", "Won", "Yen", "Dong"}};
 
-        const int jawabanBenar[] = {2, 1, 0, 2, 3, 1, 2, 1, 0, 0, 0, 2, 1, 3, 0, 2, 0, 3, 0, 1};
+        const int jawabanBenar[] = {2, 1, 0, 2, 3, 1, 2};
 
         int jumlahSoal = sizeof(soal) / sizeof(soal[0]);
         int soalTampil[jumlahSoal];
