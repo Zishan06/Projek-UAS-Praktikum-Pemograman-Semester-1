@@ -364,7 +364,7 @@
                         indexRank[j + 1] = key;
                     }
                     for (i = 0; i < 10; i++) {
-                        if (strlen(user[indexRank[i]].username) <= 8)
+                        if (strlen(user[indexRank[i]].username)<7)
                             break;
                         if (indexPengguna == indexRank[i])
                         {
@@ -372,6 +372,7 @@
                         }
                         printf("%d. %s\t\t%.2lf\n", i + 1, user[indexRank[i]].username, user[indexRank[i]].score);
                         printf("\033[0m");
+
                     }
                     #ifdef _WIN32 
                     Sleep(3000); 
