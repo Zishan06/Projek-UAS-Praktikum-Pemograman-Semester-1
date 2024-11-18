@@ -215,6 +215,25 @@
         
             }
 
+            printf("Timer: ");
+            int waktu;
+            for (waktu = 5; waktu >=0 ; waktu--)
+            {
+                printf("%d",waktu);
+                #ifdef _WIN32
+                Sleep(1000);
+                #else
+                sleep(1);
+                #endif
+
+                if (waktu >= 10)
+                {
+                    printf("\b \b\b");
+                }else{
+                    printf("\b");
+                }   
+            }
+
             int jawabanPengguna;
             printf("Pilihlah jawaban dari (1 - 4) : ");
             scanf("%d", &jawabanPengguna);
@@ -342,9 +361,9 @@
                     case 2:
                     printf("\nGame ini adalah projek dari bang Ganang SETYO HADI APALAH NYUSAHIN ORANG AJAHHHH:(\n");
                     #ifdef _WIN32 
-                        Sleep(5); 
+                        Sleep(5000); 
                     #else 
-                        usleep(5000000); 
+                        sleep(5); 
                     #endif
                     goto menu;
 
@@ -378,7 +397,7 @@
                         }
                     }
                     #ifdef _WIN32 
-                    Sleep(3); 
+                    Sleep(3000); 
                     #else 
                     sleep(3); 
                     #endif
