@@ -376,25 +376,21 @@
                     for (int i = 1; i < 14; i++) {
                         int key = indexRank[i];
                         int j = i - 1;
-                        while (j >= 0 && user[indexRank[j]].score < user[key].score) {
+                        while (j >= 0 && user[indexRank[j]].score < user[key].score && strlen(user[key].username)>=8) {
                             indexRank[j + 1] = indexRank[j];
                             j = j - 1;
                         }
                         indexRank[j + 1] = key;
                     }
-                    for(i=0; i<10; i++) {
-            
-                        if(strlen(user[indexRank[i]].username) <= 0) 
+                    for (i = 0; i < 10; i++) {
+                        if (strlen(user[indexRank[i]].username) <= 8)
                             break;
-                        for(i = 0; i < 10; i++){
-                            if (strlen(user[indexRank[i]].username) >= 8){
-                                if(indexPengguna==indexRank[i]) {
-                                    printf("\033[33m");
-                                }
-                                printf("%d. %s\t\t%.2lf\n", i+1, user[indexRank[i]].username, user[indexRank[i]].score);
-                                printf("\033[0m");
-                            }
+                        if (indexPengguna == indexRank[i])
+                        {
+                            printf("\033[33m");
                         }
+                        printf("%d. %s\t\t%.2lf\n", i + 1, user[indexRank[i]].username, user[indexRank[i]].score);
+                        printf("\033[0m");
                     }
                     #ifdef _WIN32 
                     Sleep(3000); 
