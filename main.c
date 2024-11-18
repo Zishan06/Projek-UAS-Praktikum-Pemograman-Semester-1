@@ -215,25 +215,6 @@
         
             }
 
-            printf("Timer: ");
-            int waktu;
-            for (waktu = 5; waktu >=0 ; waktu--)
-            {
-                printf("%d",waktu);
-                #ifdef _WIN32
-                Sleep(1000);
-                #else
-                sleep(1);
-                #endif
-
-                if (waktu >= 10)
-                {
-                    printf("\b \b\b");
-                }else{
-                    printf("\b");
-                }   
-            }
-
             int jawabanPengguna;
             printf("Pilihlah jawaban dari (1 - 4) : ");
             scanf("%d", &jawabanPengguna);
