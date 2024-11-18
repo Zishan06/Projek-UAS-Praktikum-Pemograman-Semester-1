@@ -308,21 +308,13 @@
                     printf("\nSkor akhir anda : %.2lf\n", user[indexPengguna].score);
 
                     if (user[indexPengguna].score <= 100 && user[indexPengguna].score >= 80)
-                    {
                         printf("Kelaz king!\n\nTerimakasih telah bermain!\n");
-                    }
                     else if (user[indexPengguna].score <= 79 && user[indexPengguna].score >= 60)
-                    {
                         printf("Okela.\n\nTerimakasih telah bermain!\n");
-                    }
                     else if (user[indexPengguna].score <= 59 && user[indexPengguna].score >= 40)
-                    {
                         printf("Belajar lagi dek.\n\nMohon dicoba lagi nanti!\n");
-                    }
                     else if (user[indexPengguna].score <= 39 && user[indexPengguna].score >= 0)
-                    {
                         printf("Bodo kali la!\n\nTidur aja sana!\n");
-                    }
 
                     FILE *updateFile = fopen("database/login.bin", "rb+");
                     if (updateFile == NULL)
