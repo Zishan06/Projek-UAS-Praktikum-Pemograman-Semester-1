@@ -280,22 +280,10 @@
             int pilihan;
             if(isCorrect==2) {
                 srand(time(NULL));
-                menu:
-                printf("\nSelamat datang %s\nScore saat ini: %.2lf\n\n", user[indexPengguna].username, user[indexPengguna].score);
-                reset:
+                printf("\nSelamat datang %s\nScore saat ini: %.2lf\n", user[indexPengguna].username, user[indexPengguna].score);
                 while(1){
-                    printf("1. Mulai\n2. Credit\n3. Exit\n4. Daftar Score\n\nPilih (1 - 4) : ");
-                    if(scanf("%d", &pilihan) != 1){
-                        while(getchar() != '\n');
-                        printf("\nInput tidak valid. Pilih (1 - 4) :\n ");
-                        goto reset;
-                    }
-                    if(pilihan < 1 || pilihan > 4){
-                        printf("\nPilihan tidak valid. Pilih (1 - 4) :\n ");
-                        goto reset;
-                    }
-                    break;
-                }
+                printf("\n1. Mulai\n2. Credit\n3. Exit\n4. Daftar Score\n\nPilih (1 - 4) : ");
+                scanf("%d", &pilihan);
                 int pilihmode;         
                 switch(pilihan) {
                     case 1:
@@ -328,8 +316,7 @@
 
                     while (fgets(baris, sizeof(baris), updateFile))
                     {
-                        if(k == indexPengguna)
-                        {
+                        if(k == indexPengguna) {
                             fseek(updateFile, -strlen(baris), SEEK_CUR);
                             fprintf(updateFile, "%s#%s=%.2lf\n", user[k].username, user[k].pass, user[indexPengguna].score);
                             break;
@@ -346,7 +333,7 @@
                     #else 
                         sleep(5); 
                     #endif
-                    goto menu;
+                    break;
 
                     case 3:
                     exit(1);
@@ -357,19 +344,17 @@
                     for (int i = 1; i < 14; i++) {
                         int key = indexRank[i];
                         int j = i - 1;
-                        while (j >= 0 && user[indexRank[j]].score < user[key].score && strlen(user[key].username)>=8) {
+                        while (j >= 0 && user[indexRank[j]].score < user[key].score) {
                             indexRank[j + 1] = indexRank[j];
                             j = j - 1;
                         }
                         indexRank[j + 1] = key;
                     }
                     for (i = 0; i < 10; i++) {
-                        if (strlen(user[indexRank[i]].username)<7)
+                        if (user[indexRank[i]].score < 1) 
                             break;
-                        if (indexPengguna == indexRank[i])
-                        {
+                        if (indexPengguna == indexRank[i]) 
                             printf("\033[33m");
-                        }
                         printf("%d. %s\t\t%.2lf\n", i + 1, user[indexRank[i]].username, user[indexRank[i]].score);
                         printf("\033[0m");
 
@@ -379,8 +364,12 @@
                     #else 
                     sleep(3); 
                     #endif
-                    goto menu;
+                    break;
 
+                    default:
+                    printf("\nMaaf, pilihan tidak ditemukan\n");
+
+                }
                 }
             
             } else if (isCorrect == 0) {
