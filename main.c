@@ -327,7 +327,7 @@
                     break;
 
                     case 2:
-                    printf("\nGame ini adalah projek dari bang Ganang SETYO HADI APALAH NYUSAHIN ORANG AJAHHHH:(\n");
+                    printf("\nTWK (Tes Wawasan Kematian) merupakan sebuah project yang dibangun oleh 5 mahasiswa informatika dalam rangka penilaian UAS, TWK merupakan sebuah game yang dimainkan perorangan dengan cara register, and play,setiap score yang didapatkan oleh player akan disimpan lalu dapat ditampilkan, dengan bantuan dan arahan dari bang ganang dan kak tasya Alhamdulillah TWK Berjalan dengan baik. (\n");
                     #ifdef _WIN32 
                         Sleep(5000); 
                     #else 
