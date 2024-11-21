@@ -377,7 +377,7 @@
                                     } else if(pilihMode=='\n' || pilihMode==' ') {
                                         soalQuiz(&user[indexPengguna].score, indexMode);
                                         break;
-                                    } else if(pilihMode==127) {
+                                    } else if(pilihMode==127 || pilih == '\b') {
                                         goto menu;
                                         
                                     } else {
@@ -422,7 +422,7 @@
                                 printf("Tekan BACKSPACE untuk kembali");
                                 while(1) {
                                     pilih = getch();
-                                    if(pilih==127)
+                                    if(pilih==127 || pilih == '\b')
                                     goto menu;
                                 }
                                 goto menu;
@@ -467,7 +467,7 @@
                                 printf("\nTekan BACKSPACE untuk kembali");
                                 while(1) {
                                     pilih = getch();
-                                    if(pilih==127)
+                                    if(pilih==127 || pilih == '\b')
                                         goto menu;
                                 }
                             }
