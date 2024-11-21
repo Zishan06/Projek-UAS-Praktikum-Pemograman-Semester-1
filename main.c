@@ -277,6 +277,55 @@
         }    
     }
 
+    void endingrahasia(){
+        char keinginan[30];
+        char jalur[50];
+        
+    #ifdef _WIN32
+        system("cls");  
+    #else
+        system("clear");  
+    #endif
+        printf("\033[0;31m");
+        printf("Selamat!!! kamu adalah orang yang kami cari!! \n");
+        printf("\033[0m");
+    #ifdef _WIN32 
+        Sleep(3000); 
+    #else 
+        sleep(3); 
+    #endif
+        printf("Tampaknya kamu adalah orang yang sangat pintar bahkan melebihi kepintaran Albert Einstein!!\n");
+        printf("Sebagai hadiah, silahkan masukkan keinginanmu, nanti akan admin belikan :3 = ");
+        
+        fgets(keinginan, sizeof(keinginan), stdin);
+        keinginan[strcspn(keinginan, "\n")] = '\0';
+        snprintf(jalur, sizeof(jalur), "database/ambil %s di sini", keinginan);
+        FILE *sikritending = fopen(jalur, "wb");
+
+    if (sikritending == NULL) {
+        perror("Gagal membuat file");
+        return;
+    }
+    fprintf(sikritending, "Halo! Admin yang ganteng dan cantik serta rajin menabung ini mau kasih kamu %s\n", keinginan);
+    fprintf(sikritending, "Sike!!!! YOU JUST GOT RICKROLLED\n");
+    fprintf(sikritending, "Belajar lagi dek! Jangan satu soalpun gak bisa kau jawab");
+
+    fclose(sikritending);
+
+    printf("File untuk klaim hadiah %s berhasil dibuat, silahkan tunggu 5 detik, file akan otomatis dibuka ya :3\n", keinginan);
+    #ifdef _WIN32 
+        Sleep(5000); 
+        system("start https://www.youtube.com/watch?v=uHgt8giw1LY");
+    #else 
+        sleep(5); 
+        system("xdg-open https://www.youtube.com/watch?v=uHgt8giw1LY");
+    #endif
+    
+    
+
+    }
+
+
 
     int main(int argc, char *argv[]){
         if(argc < 2){
@@ -397,8 +446,10 @@
                                     printf("Okela.\n\nTerimakasih telah bermain!\n");
                                 else if (user[indexPengguna].score <= 59 && user[indexPengguna].score >= 40)
                                     printf("Belajar lagi dek.\n\nMohon dicoba lagi nanti!\n");
-                                else if (user[indexPengguna].score <= 39 && user[indexPengguna].score >= 0)
+                                else if (user[indexPengguna].score <= 39 && user[indexPengguna].score > 0)
                                     printf("Bodo kali la!\n\nTidur aja sana!\n");
+                                else if (user[indexPengguna].score <= 0)
+                                    endingrahasia();
 
                                 FILE *updateFile = fopen("database/login.bin", "rb+");
                                 if (updateFile == NULL) {
@@ -491,4 +542,4 @@
         }
     return 0;
     } 
-    
+     
