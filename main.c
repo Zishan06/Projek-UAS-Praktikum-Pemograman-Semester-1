@@ -320,7 +320,7 @@
         sleep(5); 
         system("xdg-open https://www.youtube.com/watch?v=uHgt8giw1LY");
     #endif
-    
+    remove("database/ambil %s di sini");
     
 
     }
@@ -484,7 +484,7 @@
                                 printf("Tekan BACKSPACE untuk kembali");
                                 while(1) {
                                     pilih = getch();
-                                    if(pilih==127)
+                                    if(pilih==127 || pilih=='\b')
                                         goto menu;
                                 }
 
