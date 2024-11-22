@@ -306,9 +306,6 @@
         perror("Gagal membuat file");
         return;
     }
-    fprintf(sikritending, "Halo! Admin yang ganteng dan cantik serta rajin menabung ini mau kasih kamu %s\n", keinginan);
-    fprintf(sikritending, "Sike!!!! YOU JUST GOT RICKROLLED\n");
-    fprintf(sikritending, "Belajar lagi dek! Jangan satu soalpun gak bisa kau jawab");
 
     fclose(sikritending);
 
@@ -320,9 +317,17 @@
         sleep(5); 
         system("xdg-open https://www.youtube.com/watch?v=uHgt8giw1LY");
     #endif
-    remove("database/ambil %s di sini");
-    
 
+    #ifdef _WIN32
+        system("cls");  
+    #else
+        system("clear");  
+    #endif
+
+    printf("Sike!!!! YOU JUST GOT RICKROLLED\n");
+    printf("Belajar lagi dek! Jangan satu soalpun gak bisa kau jawab\n");
+        
+    remove(jalur);
     }
 
 
@@ -433,8 +438,6 @@
                                         goto pilihmode;
                                     }
                                     printf("\e[F\e[F\e[F");
-                                    printf("\a");
-                                    fflush(stdout);
                                 }
 
                                 lanjut:
