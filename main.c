@@ -309,7 +309,7 @@
 
     fclose(sikritending);
 
-    printf("File untuk klaim hadiah %s berhasil dibuat, silahkan tunggu 5 detik, file akan otomatis dibuka ya :3\n", keinginan);
+    printf("\nAdmin yang ganteng dan cantik serta rajin menabung ini akan kasih kamu \033[1m%s\033[0m :3\nsilahkan tunggu 5 detik...", keinginan);
     #ifdef _WIN32 
         Sleep(5000); 
         system("start https://www.youtube.com/watch?v=uHgt8giw1LY");
