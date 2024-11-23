@@ -63,12 +63,7 @@
         printf("-> Masukkan password     : ");
         fgets(penggunabaru.pass, sizeof(penggunabaru.pass), stdin);
         penggunabaru.pass[strcspn(penggunabaru.pass, "\n")] = '\0';
-
-        if(strlen(penggunabaru.pass) < 8 || strlen(penggunabaru.pass) > 20){
-            printf("Password harus minimal 8 karakter dan maksimal 20 karakter.\n");
-            return;
-        }
-
+        
         for (int i = 0; penggunabaru.pass[i] != '\0'; i++) {
             if (!isalnum(penggunabaru.pass[i])) {
             printf("Password tidak boleh mengandung karakter special.\n");
