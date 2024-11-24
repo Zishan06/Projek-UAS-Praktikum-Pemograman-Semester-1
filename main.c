@@ -128,16 +128,16 @@
             "Negara apa yang disebut dengan 'Negari Tirai Bambu'?",
             "Apa bahasa resmi di brazil?",
             "Berapa warna yang ada pada bendera italia?",
-            "apabila nun mati atau tanwin bertemu dengan huruf fa maka hukumnya?",
-            "di bawah ini yang termasuk sifat mustahil nabi adalah?",
-            "ada berapa sifat wajib Allah?",
-            "siapa nama dosen kece kelas b?",
-            "syifa ngecrushin doi selama 2 tahun, ternyata doi udah punya pacar, tapi ga dipost aja. tebak berapa hts syifa sekarang?",
-            "7 ekor buaya dikali 3, berapa total buaya sekarang?",
-            "5 x 4 + 3 : 100 + kamu sama yang lain = ?",
-            "berapa banyak rukun shalat?",
-            "di tahan sakit, di keluarin malu, apakah gerangan?",
-            "berapa banyak rukun islam?"};
+            "Satelit alami terbesar di tata surya adalah?",
+            "Pelukis terkenal dengan karya the presistence of memory adalah?",
+            "Dalam teori ekonomi, istilah invisible hand dikemukakan oleh?",
+            "Gunung apa yang dikenal sebagai gunung berapi tertinggi di dunia?",
+            "Siapa tokoh yang dikenal sebagai bapak ekonomi modern?",
+            "Pada tahun berapakah perang dunia II berakhir?",
+            "Indeks harga saham di jepang dikenal sebagai?",
+            "Unsur kimia apa yang memiliki hg?",
+            "Siapa pendiri microsoft?",
+            "Siapa penulis novel 1984?"};
 
         const char *pilihan[][4] = {
             {"Samudra Atlantik", "Samudra Arktik", "Samudra Pasifik", "Samudra Hindia"},
@@ -150,17 +150,18 @@
             {"Jepang", "China", "Korea Selatan", "Vietnam"},
             {"Portugis", "Spanyol", "Inggris", "Prancis"},
             {"3", "2", "4", "5"},
-            {"ikhfa", "iqlab", "mad asli", "saktah"},
-            {"sidik", "amanah", "kadzib", "tablig"},
-            {"15", "20", "1", "10"},
-            {"pak mahyus", "pak taufiq", "s14p4 y4ch?", "pak alim<3"},
-            {"0 lah bjir stay halal!!", "keknya si 4 yah", "1 fakultas sie", "otw cari tuh"},
-            {"21", "4", "10", "15"},
-            {"aku yo ngoding lah ;p", "10+ hts", "23", "aku ma siapa? </3 :("},
-            {"10", "11", "9", "13" },
-            {"kentut anjay", "rasa cintaku padanya", "jawab nomor 2", "kentut tapi ga bunyi"},
-            {"6", "5","2", "3"}};
+            {"Ganymede", "Titan", "Europa", "Callisto"},
+            {"Pablo Picasso", "Claude Monet", "Salvador Dali", "Vincent Van Gogh"},
+            {"Thomas Malthus", "Adam Smith", "Friedrich Hayek", "David Ricardo"},
+            {"Mount Etna", "Kilimanjaro", "Mauna Kea", "Ojos Del Salado"},
+            {"Adam Smith", "Karl Max", "John Maynard Keynes", "Milton Friedman"},
+            {"1947", "1944", "1945", "1946"},
+            {"Nikkei", "Dow Jones", "FTSE", "Hang Seng"},
+            {"magnesium", "hidrogen", "helium", "merkuri" },
+            {"Bill Gates", "Larry Page", "Mark Zuckerberg", "Steve Jobs"},
+            {"Franz Kafka", "George Orwell","Aldous Huxley", "Fyodor Dostoevsky"}};
 
+       
         const int jawabanBenar[] = {2, 1, 0, 2, 3, 1, 2, 1, 0, 0, 0, 2, 1, 3, 0, 2, 0, 3, 0, 1};
         const int sulittidak[] = {1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0};
 
