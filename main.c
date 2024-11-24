@@ -272,19 +272,18 @@
             }
         }    
     }
-
+    short int batas;
     void endingrahasia(){
         char keinginan[30];
         char jalur[50];
+        
         
     #ifdef _WIN32
         system("cls");  
     #else
         system("clear");  
     #endif
-        printf("\033[0;31m");
-        printf("Selamat!!! kamu adalah orang yang kami cari!! \n");
-        printf("\033[0m");
+        printf("\033[0;31mSelamat!!! kamu adalah orang yang kami cari!!\033[0m \n");
     #ifdef _WIN32 
         Sleep(3000); 
     #else 
@@ -292,19 +291,8 @@
     #endif
         printf("Tampaknya kamu adalah orang yang sangat pintar bahkan melebihi kepintaran Albert Einstein!!\n");
         printf("Sebagai hadiah, silahkan masukkan keinginanmu, nanti akan admin belikan :3 = ");
-        
         fgets(keinginan, sizeof(keinginan), stdin);
         keinginan[strcspn(keinginan, "\n")] = '\0';
-        snprintf(jalur, sizeof(jalur), "database/ambil %s di sini", keinginan);
-        FILE *sikritending = fopen(jalur, "wb");
-
-    if (sikritending == NULL) {
-        perror("Gagal membuat file");
-        return;
-    }
-
-    fclose(sikritending);
-
     printf("\nAdmin yang ganteng dan cantik serta rajin menabung ini akan kasih kamu \033[1m%s\033[0m :3\nsilahkan tunggu 5 detik...", keinginan);
     #ifdef _WIN32 
         Sleep(5000); 
@@ -319,11 +307,9 @@
     #else
         system("clear");  
     #endif
-
     printf("Sike!!!! YOU JUST GOT RICKROLLED\n");
     printf("Belajar lagi dek! Jangan satu soalpun gak bisa kau jawab\n");
-        
-    remove(jalur);
+    batas++;
     }
 
 
@@ -448,8 +434,10 @@
                                 else if (user[indexPengguna].score <= 39 && user[indexPengguna].score > 0)
                                     printf("Bodo kali la!\n\nTidur aja sana!\n");
                                 else if (user[indexPengguna].score <= 0)
-                                    endingrahasia();
-
+                                    if(batas == 0)
+                                     endingrahasia();
+                                    else 
+                                     printf("Tolong jangan sama sekali ga bisa dijawab :( \n");
                                 FILE *updateFile = fopen("database/login.bin", "rb+");
                                 if (updateFile == NULL) {
                                     perror("Error ges");
@@ -488,6 +476,7 @@
                                 }
 
                                 case 2:
+                                batas = 0;
                                 exit(1);
 
                                 case 3:
