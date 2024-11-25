@@ -259,11 +259,9 @@
                 
             }
             else {
-                while(1) {
                     clear();
                     printf("\033[31mJawaban Salah!\nANDA TERELIMINASI!!\n\033[0m\nJawaban yang benar adalah \033[32m%s\033[0m\n", pilihan[indeks][jawabanBenar[indeks]]);
                     return;
-                }
             }
         }    
     }
